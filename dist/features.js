@@ -49,7 +49,7 @@ export function createFeatures(ctx) {
     const reached = scan?.available ? scan.pools.filter(p => p.band === 'reached') : [];
     const shown = reached.slice(0, scanVisible);
     return heading('How many pools closed beyond your rank?',
-      'A free historical count from bundled MCC allotments — one pool is one institute + course + quota + seat category, judged by its latest observation.', '<span class="chip">Free · No login</span>')
+      'A free historical count from bundled allotments on the NEET PG AIR scale (MCC, plus any state datasets you load) — one pool is one institute + course + quota + seat category, judged by its latest observation.', '<span class="chip">Free · No login</span>')
       + `<div class="grid cols-2"><section class="panel"><div class="panel-header"><h2>Scan by All India rank</h2><span class="badge success">HISTORICAL</span></div>
       <form id="scan-form" class="panel-body form-grid">
         <label class="field"><span>Your NEET PG All India rank</span><input name="rank" type="number" min="1" step="1" required placeholder="e.g. 25,000" value="${e(f.rank || '')}"></label>
@@ -234,7 +234,7 @@ export function createFeatures(ctx) {
     const multi = d.pools.filter(p => p.drift != null);
     const shown = multi.slice(0, driftVisible);
     const cutoffs = allRecords().filter(r => r.recordKind === 'cutoff');
-    return heading('How cutoffs move between rounds.', 'First vs latest closing AIR for every pool observed in more than one round. History, not a forecast.')
+    return heading('How cutoffs move between rounds.', 'First vs latest closing AIR for every pool observed in more than one round, on the NEET PG AIR scale only. History, not a forecast.')
       + `<form id="drift-form" class="panel filters"><div class="toolbar">
         ${selectField('specialty', 'Specialty', unique(cutoffs.map(r => r.specialty)), f.specialty || '')}
         ${selectField('category', 'Seat category', unique(cutoffs.map(r => r.category)), f.category || '')}
@@ -282,7 +282,7 @@ export function createFeatures(ctx) {
       </form></section>`
       + (chosen ? `<section class="panel section-gap"><div class="panel-header"><div><h2>${e(chosen.name)}</h2><span class="small text-muted">${e(chosen.state || '')} · ${num(pools.length)} cutoff pools${rank ? ` · your AIR ${num(Number(rank))}` : ''}</span></div>${btn('Full profile', 'institute-profile', 'secondary', `data-id="${e(chosen.id)}"`)}</div>
         ${pools.length ? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Course</th><th>Quota / category</th><th>Closing AIR by round</th><th>Latest gap vs you</th></tr></thead><tbody>
-        ${pools.map(p => `<tr><td>${e(p.course)}</td><td>${e(p.quota)}<br><span class="text-muted">${e(p.category)}</span></td><td><div class="round-history">${p.history.map(h => `<span class="chip">${e(h.year)} ${e(h.round)} <strong>${num(h.closingRank)}</strong></span>`).join('')}</div></td><td class="numeric">${p.gap == null ? 'Enter AIR' : p.gap >= 0 ? `<span class="badge success">Closed ${num(p.gap)} beyond you</span>` : `<span class="badge warning">Needed ${num(-p.gap)} better</span>`}</td></tr>`).join('')}
+        ${pools.map(p => `<tr><td>${e(p.course)}</td><td>${e(p.quota)}<br><span class="text-muted">${e(p.category)}</span></td><td><div class="round-history">${p.history.map(h => `<span class="chip">${e(h.year)} ${e(h.round)} <strong>${num(h.closingRank)}</strong></span>`).join('')}</div></td><td class="numeric">${p.gap == null ? (rank ? `<span class="badge neutral">${e(p.rankScale)} scale</span>` : 'Enter AIR') : p.gap >= 0 ? `<span class="badge success">Closed ${num(p.gap)} beyond you</span>` : `<span class="badge warning">Needed ${num(-p.gap)} better</span>`}</td></tr>`).join('')}
         </tbody></table></div><p class="small text-muted panel-body">“Gap” compares your AIR with the latest bundled closing rank only. The easiest historical closing for a pool may be in an earlier round — read every chip before deciding.</p>` : empty('No cutoff pools match', 'This institute may have no bundled historical observations for that specialty/category.', null)}
         </section>` : '<p class="data-note section-gap">Search, pick the institute, and run it. Add your AIR to see the gap in ranks for every pool.</p>');
   }

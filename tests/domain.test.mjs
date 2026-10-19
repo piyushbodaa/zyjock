@@ -169,6 +169,23 @@ test('share payload round-trips and tampered input fails closed', () => {
   assert.equal(decodeShareToken('!!!not-base64!!!'), null);
 });
 
+test('rankScan and roundDrift never mix state merit ranks into AIR results', () => {
+  const stateRec = cut('st-1', 'i2', 'M.D. General Medicine', 'State Quota', 'Open', 2025, 'Round 1', 90000, { rankType: 'State merit rank', quota: 'State Quota' });
+  const scan = rankScan([...records, stateRec], { rank: 10000 }, inst);
+  assert.equal(scan.pools.some(p => p.record.id === 'st-1'), false);
+  const scanState = rankScan([...records, stateRec], { rank: 10000, rankType: 'State merit rank' }, inst);
+  assert.equal(scanState.totalPools, 1);
+  const drift = roundDrift([...records, stateRec], {}, inst);
+  assert.equal(drift.pools.some(p => p.record.id === 'st-1'), false);
+});
+
+test('poolHistory withholds AIR gap on non-AIR scales', () => {
+  const stateRec = cut('st-2', 'i1', 'M.D. Anatomy', 'State Quota', 'Open', 2025, 'Round 1', 3000, { rankType: 'State merit rank', specialty: 'Anatomy' });
+  const pools = poolHistory([stateRec], 'i1', 10000);
+  assert.equal(pools[0].gap, null);
+  assert.equal(pools[0].rankScale, 'State merit rank');
+});
+
 test('listDiff reports common, exclusive and moved entries', () => {
   const d = listDiff(['a', 'b', 'c'], ['b', 'a', 'd']);
   assert.deepEqual(d.common.sort(), ['a', 'b']);

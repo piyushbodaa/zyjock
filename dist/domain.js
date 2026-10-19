@@ -117,7 +117,7 @@ function sorter(sort, map) {
     bond: 'bondYears', 'bond-asc': 'bondYears', 'name-asc': 'name', alphabetical: 'name',
     'year-desc': '-year', 'year-asc': 'year', 'seat-change': '-seatDelta',
   };
-  const input = typeof sort === 'object' && sort ? `${sort.direction === 'desc' ? '-' : ''}${sort.field}` : (sort || 'name');
+  const input = typeof sort === 'object' && sort ? `${sort.direction === 'desc' ? '-' : ''}${sort.field}` : String(sort || 'name');
   const key = aliases[input] || input;
   const descending = key.startsWith('-');
   const field = descending ? key.slice(1) : key;
@@ -281,12 +281,12 @@ const HEADER_ALIASES = {
 };
 
 export function validateImport(rows = []) {
-  const errors = [...(rows.errors || [])], warnings = [], records = [];
+  const errors = [...(Array.isArray(rows) ? rows.errors || [] : [])], warnings = [], records = [];
   if (!Array.isArray(rows) || !rows.length) return { valid: false, records, errors: [{ row: 1, field: '', message: 'The CSV contains no data rows.' }], warnings };
   const ids = new Set();
   rows.forEach((original, index) => {
     const rowNumber = index + 2;
-    const input = Object.fromEntries(Object.entries(original).map(([key, value]) => {
+    const input = Object.fromEntries(Object.entries(original && typeof original === 'object' ? original : {}).map(([key, value]) => {
       const compact = lower(key).replace(/[\s_-]/g, '');
       return [HEADER_ALIASES[compact] || compact, value];
     }));
@@ -377,14 +377,19 @@ export function rankBand(closingRank, rank) {
  * closed at or beyond the supplied rank. One pool = institute + course +
  * quota + allotted seat category. Filters match exactly (blank = all).
  */
+const AIR = 'NEET PG AIR';
+const onScale = (record, scale) => present(record.rankType) ? lower(record.rankType) === lower(scale) : lower(scale) === lower(AIR);
+
 export function rankScan(records = [], options = {}, institutes = []) {
   const rank = numberOrNull(options.rank);
+  const scale = present(options.rankType) ? String(options.rankType) : AIR;
   if (rank == null || rank <= 0) return { available: false, reason: 'Enter your NEET PG All India rank from your official scorecard.', pools: [], totalPools: 0, reachedCount: 0, nearCount: 0, beyondCount: 0, bySpecialty: [] };
   const map = instituteMap(institutes);
   const wanted = (value, selected) => unrestricted(selected) || lower(value) === lower(selected);
   const groups = new Map();
   for (const record of records) {
     if (record.recordKind !== 'cutoff' && closingOf(record) == null) continue;
+    if (!onScale(record, scale)) continue;
     const closing = closingOf(record);
     if (closing == null) continue;
     const inst = institution(record, map);
@@ -505,11 +510,13 @@ const sortHistory = rows => [...rows].sort((a, b) => compareNumber(a.year, b.yea
  * description only — later rounds differ in seats, rules and participants.
  */
 export function roundDrift(records = [], options = {}, institutes = []) {
+  const scale = present(options.rankType) ? String(options.rankType) : AIR;
   const map = instituteMap(institutes);
   const wanted = (value, selected) => unrestricted(selected) || lower(value) === lower(selected);
   const groups = new Map();
   for (const record of records) {
     if (record.recordKind !== 'cutoff') continue;
+    if (!onScale(record, scale)) continue;
     const closing = numberOrNull(record.closingRank);
     if (closing == null) continue;
     const inst = institution(record, map);
@@ -574,12 +581,14 @@ export function poolHistory(records = [], instituteId, yourRank = null) {
     const latest = sorted.at(-1);
     const latestClosing = numberOrNull(latest.closingRank);
     const bestClosing = Math.max(...sorted.map(r => numberOrNull(r.closingRank)));
+    const rankScale = text(latest.rankType) || AIR;
+    const comparable = rank != null && rank > 0 && lower(rankScale) === lower(AIR);
     return {
       record: latest, course: latest.course, specialty: latest.specialty, program: latest.program,
-      quota: latest.quota, category: latest.category, history: sorted,
+      quota: latest.quota, category: latest.category, history: sorted, rankScale,
       latestClosing, bestClosing,
-      gap: rank != null && rank > 0 ? latestClosing - rank : null,
-      bestGap: rank != null && rank > 0 ? bestClosing - rank : null,
+      gap: comparable ? latestClosing - rank : null,
+      bestGap: comparable ? bestClosing - rank : null,
     };
   }).sort((a, b) => compareNumber(a.latestClosing, b.latestClosing));
 }
@@ -635,7 +644,7 @@ export function decodeShareToken(token) {
 
 /** Compare two ordered lists by record id. Positions are 1-based. */
 export function listDiff(aItems = [], bItems = []) {
-  const a = [...aItems], b = [...bItems];
+  const a = [...(Array.isArray(aItems) ? aItems : [])], b = [...(Array.isArray(bItems) ? bItems : [])];
   const posA = new Map(a.map((id, i) => [id, i + 1])), posB = new Map(b.map((id, i) => [id, i + 1]));
   const common = a.filter(id => posB.has(id));
   return {

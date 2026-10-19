@@ -1,5 +1,5 @@
 /* Zyjock offline support. Bump VERSION on every release that changes the shell. */
-const VERSION = 'zyjock-v4';
+const VERSION = 'zyjock-v5';
 const SHELL = [
   './', './index.html', './app.js', './domain.js', './expansion.js', './features.js',
   './styles.css', './favicon.svg', './manifest.webmanifest', './icon-192.png', './icon-512.png',
@@ -24,8 +24,10 @@ self.addEventListener('fetch', event => {
   if (request.url.includes('data.json')) {
     event.respondWith(
       fetch(request).then(response => {
-        const copy = response.clone();
-        caches.open(VERSION).then(cache => cache.put(request, copy));
+        if (response.ok) {
+          const copy = response.clone();
+          caches.open(VERSION).then(cache => cache.put(request, copy));
+        }
         return response;
       }).catch(() => caches.match(request)),
     );
