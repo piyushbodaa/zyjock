@@ -1,0 +1,46 @@
+ZYJOCK DATA ACQUISITION AND COVERAGE
+Acquired: 2026-10-19
+Public website data file: dist/data.json
+Reproduction: python sources/build_data.py (run from zyjock/)
+
+VERIFIED HISTORICAL SCOPE
+20 institutions listed in MCC's one-page FINAL SEAT MATRIX FOR AIIMS/BHU/JIMPER ROUND 1 UG 2025 (MBBS & BDS). Only MBBS, NEET UG, MCC, Open Seat Quota, 2025, Round 1 are bundled as verified. This is not an exhaustive national, all-quota, all-round or all-exam dataset.
+
+PRIMARY SOURCES
+1. MCC archive page, which links all three PDFs below:
+   https://mcc.nic.in/archive-ug/
+2. Seat matrix uploaded July 22, 2025:
+   https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/07/2025072296.pdf
+3. Final Result for Round-I of NEET UG Counselling 2025, August 13, 2025:
+   https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/08/20250813289226788.pdf
+4. MCC correction, August 13, 2025, removing one SC PwD seat at AIIMS New Delhi:
+   https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/08/20250813868365001.pdf
+
+METHOD
+- Downloaded public official PDFs; retained original PDFs and pdftotext -layout text in sources/.
+- Parsed 20 matrix rows by MCC institute code; verified each row sums to its published total.
+- Applied the specific AIIMS New Delhi SC PwD correction: July value 1 becomes 0. Original values remain documented in the record notes and linked source.
+- Selected only corresponding institutions, MBBS and Open Seat Quota in the final allotment result.
+- Aggregated minimum and maximum rank by institute and ALLOTTED category. No individual candidate records, names, roll numbers or application identifiers are in dist/data.json.
+- Preserved the distinction between allotted seat category and candidate category. Handled wrapped PwD cells using the original table column positions. Using candidate category instead would produce incorrect cutoffs.
+- Normalized matrix General-EWS to EWS, matching the result document; preserved originalCategory in each record. Open means the open seat category, not solely General-category candidates.
+- City/name spelling is normalized for display; source institution codes are retained. Unverified university and institution-website fields remain null.
+- openingRank / closingRank are DERIVED historical aggregates of allotted candidates. They are not MCC-published forecast probabilities, current vacancies, admissions guarantees or joined-candidate cutoffs.
+
+RECONCILIATION
+200 institution/category pools across 20 institutions.
+2,178 historical allotments in the included institutions.
+2,178 seats after applying the documented deletion.
+Every individual institution/category pool's allotment count equals its corrected matrix count.
+174 pools have at least one allotted rank; 26 zero-seat pools correctly have null ranks.
+No unreconciled pool remains in this bounded dataset.
+PDF SHA-256 hashes and acquisition counts are saved in sources/acquisition-summary.json.
+
+UNVERIFIED FIELDS
+No verified annual fee, stipend, service bond, bond penalty, previous-year seats, score-to-rank curve, current vacancy or new-seat change is bundled. Those fields are null in all official records. Academic rules and requirements must be checked against the current session's official sources.
+
+DEMONSTRATION DATA
+Eight explicitly fictional institutions have names beginning 'Demo ·'. The dataStatus is demo; verified is false; sourceUrl is null. The 1,440 generated records span six exams, 2024/2025, three rounds and five categories to demonstrate filtering, comparisons, choice lists, fee/bond tools and trends. These are not admissions facts and must remain opt-in / visibly identified in the UI. The generated rankCurves are also demo-only.
+
+RESOURCES AND NOTICES
+Official portal links were browsed on acquisition day. Notices are links to official notice boards, with date=null; they are not fabricated deadlines and the app does not claim a live synchronized notice feed. A dated historical correction is listed separately. No private Zynerd API or database was accessed or used.
