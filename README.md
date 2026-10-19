@@ -18,7 +18,7 @@ Deploy the complete `dist/` directory. Its `data.json` manifest loads active inv
 
 ## Vercel deployment
 
-Production: <https://zyjock.vercel.app>. Vercel project `zyjock` is linked locally; `vercel.json` serves `dist/` without a build or install step. `.vercelignore` uploads the static bundle and deployment configuration only. Local credentials and acquisition intermediates are excluded.
+Production: <https://zyjock.vercel.app>. The Vercel project `zyjock` is connected to this GitHub repository, so every push to `main` deploys automatically; `vercel.json` serves `dist/` without a build or install step. `.vercelignore` uploads the static bundle and deployment configuration only. Local credentials and acquisition intermediates are excluded.
 
 ```bash
 npx --yes vercel@64.3.1 deploy --prod --scope piyushbodaa --yes

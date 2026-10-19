@@ -549,6 +549,17 @@
       "checkedAt": "2026-10-19"
     },
     {
+      "id": "pg-matrix-discrepancy-2026",
+      "title": "Verify the PG 2026 seat matrix; report discrepancies before Round 1 choice filling ends",
+      "exam": "NEET PG",
+      "authority": "MCC",
+      "date": "2026-10-15",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610151265361532.pdf",
+      "kind": "Seat matrix",
+      "description": "MCC asks participating institutes to verify seat counts in the published matrix and report discrepancies before Round 1 choice filling closes. Zyjock's 15 October snapshot can therefore be revised; re-check the current MCC matrix before locking choices.",
+      "checkedAt": "2026-10-19"
+    },
+    {
       "id": "pg-nri-2026",
       "title": "NRI passport-document corrigendum",
       "exam": "NEET PG",

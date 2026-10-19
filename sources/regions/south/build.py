@@ -149,19 +149,30 @@ for key,title in [('telangana-mq-seats','non-minority colleges'),('telangana-mq-
       i=institution(code,colleges.get(code,'KNRUHS college code '+code),'Telangana','Private');rec(i,courses.get(r[0],r[0]),q,'Management '+('minority' if key=='telangana-mq-minority' else 'non-minority'),s,pg,seats=int(v),notes='Positive published seat cells only; explicit zero cells omitted. Matrix is a snapshot, not current vacancies.');total+=int(v);cells+=1
  audit[key]={'positiveSeatCells':cells,'seats':total,'explicitZeroCellsOmitted':zeros}
 # Competent-authority course matrices: first page is the net aggregate and is excluded from output.
+# Reconciliation is per course against that net page. Diploma course pages (DO, DTCD, DPH)
+# are published in the same PDFs but are not part of the net-group page, so they are
+# tallied separately. Some college rows merge the serial number into the name cell
+# (e.g. 'TRR INSTITUTE OF MEDICAL 29 SCIENCES'); those rows are recovered, not skipped.
+def cqkey(name):return re.sub(r'^(MD|MS|ME)\s+','',clean(name).upper()).replace(' ','')
 for key,title in [('telangana-cq-clinical','clinical'),('telangana-cq-nonclinical','non-clinical')]:
- s=source(key,'KNRUHS 2025 non-minority non-service '+title+' competent authority quota seats','Telangana','seat-matrix');total=0;cells=0;expected=0
+ s=source(key,'KNRUHS 2025 non-minority non-service '+title+' competent authority quota seats','Telangana','seat-matrix');total=0;cells=0;net={};detail={};diploma={}
  for pg,rows in tables(key):
-  course=clean(rows[4][0]).replace(' (NON-SERVICE)','');headers=[clean(x) for x in rows[5]]
-  for row in rows[6:]:
-   r=[clean(x) for x in row]
-   if not r[0].isdigit():continue
-   if pg==1:expected+=sum(int(v) for v in r[2:] if v.isdigit());continue
-   name=r[1];i=institution('cq-'+ident(name),name,'Telangana')
+  rows=[[clean(x) for x in row] for row in rows]
+  if pg==1:
+   for r in rows[6:]:
+    if r[0].isdigit():net[cqkey(r[1])]=sum(int(v) for v in r[2:] if v.isdigit())
+   continue
+  course=clean(rows[4][0]).replace(' (NON-SERVICE)','');headers=rows[5]
+  bucket=detail if cqkey(course) in net else diploma
+  for r in rows[6:]:
+   if r[0].isdigit():name=r[1]
+   elif r[0] and not r[1] and any(v.isdigit() for v in r[2:]):name=clean(re.sub(r'\s\d{1,3}(?=\s|$)',' ',r[0],count=1))
+   else:continue
+   i=institution('cq-'+ident(name),name,'Telangana')
    for cat,v in zip(headers[2:],r[2:]):
-    if v.isdigit() and int(v)>0:rec(i,course,'Competent authority (non-service)',cat,s,pg,seats=int(v),notes='Source category codes retained: G denotes general allocation, F female reservation, PH disability. Net group summary page excluded.');total+=int(v);cells+=1
- if total!=expected:raise ValueError(('Telangana matrix reconciliation',key,total,expected))
- audit[key]={'seats':total,'netGroupSummarySeats':expected,'positiveSeatCells':cells}
+    if v.isdigit() and int(v)>0:rec(i,course,'Competent authority (non-service)',cat,s,pg,seats=int(v),notes='Source category codes retained: G denotes general allocation, F female reservation, PH disability. Net group summary page excluded.');total+=int(v);cells+=1;bucket[cqkey(course)]=bucket.get(cqkey(course),0)+int(v)
+ if detail!=net:raise ValueError(('Telangana matrix reconciliation',key,{c:(net.get(c),detail.get(c)) for c in set(net)|set(detail) if net.get(c)!=detail.get(c)}))
+ audit[key]={'seats':total,'netGroupSummarySeats':sum(net.values()),'positiveSeatCells':cells,'diplomaSeatsNotInNetGroup':sum(diploma.values()),'diplomaCourses':sorted(diploma)}
 s=source('telangana-prospectus-2026','KNRUHS competent authority quota prospectus 2026-27','Telangana','prospectus',2026)
 for program,penalty in [('MD/MS',2000000),('PG Diploma',1000000)]:
  fin('Telangana','KNRUHS '+program+' service and discontinuation conditions','Competent authority quota; non-service candidates',s,'21-22',program=program,quota='Competent authority',bondYears=1,bondPenalty=penalty,discontinuationPenalty=5000000,notes='Government service for one year if required by Telangana. In-service candidates excluded from this service condition. Discontinuation additionally recovers stipend/salary; after free exit, counselling debarment is three years. University admission payment 35,000 is one-time and not annual tuition. Tuition and stipend amounts not specified here.')

@@ -1,25 +1,20 @@
 {
-  "jurisdictions": 28,
-  "jurisdictionsWithRecords": 13,
-  "stateRecords": 6834,
-  "stateCutoffRecords": 5611,
-  "stateSeatRecords": 1223,
-  "financialReports": 2684,
+  "jurisdictions": 36,
+  "jurisdictionsWithRecords": 19,
+  "stateRecords": 11240,
+  "stateCutoffRecords": 7444,
+  "stateSeatRecords": 3796,
+  "financialReports": 2788,
   "financialStates": 30,
-  "financialInstitutions": 250,
+  "financialInstitutions": 273,
   "fields": {
-    "annualFee": 2517,
-    "monthlyStipend": 128,
-    "bondYears": 12,
-    "bondPenalty": 10
+    "annualFee": 2614,
+    "monthlyStipend": 141,
+    "bondYears": 19,
+    "bondPenalty": 16
   },
   "checkedAt": "2026-10-19",
   "complete": false,
-  "unpublishedRecords": 2127,
-  "unpublishedJurisdictions": [
-    "Andaman and Nicobar Islands",
-    "Andhra Pradesh",
-    "Karnataka",
-    "Kerala"
-  ]
+  "unpublishedRecords": 0,
+  "unpublishedJurisdictions": []
 }
