@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {
   rankBand, rankScan, qualifyingStatus, eligibilityChecks,
   instituteSummary, capacityRows, listCheck,
+  roundDrift, poolHistory, buildSharePayload, parseSharePayload,
+  encodeShareToken, decodeShareToken, listDiff,
 } from '../dist/domain.js';
 
 const inst = [
@@ -116,4 +118,62 @@ test('listCheck flags duplicate pools and zero-seat entries', () => {
   assert.ok(warnings.some(w => w.type === 'zero-seats'));
   assert.ok(warnings.some(w => w.type === 'no-cutoff'));
   assert.deepEqual(listCheck([items[0]]), []);
+});
+
+test('roundDrift measures first-to-last closing movement per pool', () => {
+  const drift = roundDrift(records, {}, inst);
+  const a = drift.pools.find(p => p.record.id === 'a-r2');
+  assert.equal(a.firstClosing, 5000);
+  assert.equal(a.lastClosing, 8000);
+  assert.equal(a.drift, 3000);
+  assert.equal(a.direction, 'loosened');
+  assert.equal(drift.pools.filter(p => p.observations >= 2).length, 1);
+  assert.equal(drift.medianDrift, 3000);
+  assert.equal(drift.loosenedShare, 1);
+});
+
+test('roundDrift respects category filter and needs 2+ observations for medians', () => {
+  const drift = roundDrift(records, { category: 'OBC' }, inst);
+  assert.equal(drift.pools.length, 1);
+  assert.equal(drift.medianDrift, null);
+});
+
+test('poolHistory groups one institute pools with ordered rounds and rank gap', () => {
+  const pools = poolHistory(records, 'i1', 10000);
+  const med = pools.find(p => p.course.includes('General Medicine'));
+  assert.deepEqual(med.history.map(h => h.round), ['Round 1', 'Round 2']);
+  assert.equal(med.latestClosing, 8000);
+  assert.equal(med.gap, -2000); // needed a 2,000 better (lower) rank than 10,000
+  assert.equal(poolHistory(records, 'i1', null).find(p => p.course.includes('General')).gap, null);
+});
+
+test('poolHistory follows historyIds to historical institute entities', () => {
+  const seat = { id: 's-link', instituteId: 'i-current', recordKind: 'seat-matrix', seats: 2, course: 'M.D. General Medicine', historyIds: ['a-r1', 'a-r2'] };
+  const pools = poolHistory([...records, seat], 'i-current', 9000);
+  assert.equal(pools.length, 1);
+  assert.equal(pools[0].latestClosing, 8000);
+  assert.equal(pools[0].gap, -1000);
+});
+
+test('share payload round-trips and tampered input fails closed', () => {
+  const list = { name: 'My list', items: ['r1', 'r2'], tags: { r1: 'dream' } };
+  const byId = { r1: { dataset: 'mcc' }, r2: { dataset: 'state:Kerala' } };
+  const payload = buildSharePayload(list, id => byId[id]);
+  assert.deepEqual(payload.items, [['r1', 'mcc'], ['r2', 'state:Kerala']]);
+  const token = encodeShareToken(payload);
+  assert.deepEqual(parseSharePayload(JSON.parse(decodeShareToken(token))), payload);
+  assert.equal(parseSharePayload(null), null);
+  assert.equal(parseSharePayload({ v: 99, items: [] }), null);
+  assert.equal(parseSharePayload({ v: 1, name: 'x', items: 'nope' }), null);
+  assert.equal(parseSharePayload({ v: 1, name: 'x', items: [['ok', 'mcc'], [42, 'mcc']] }), null);
+  assert.equal(decodeShareToken('!!!not-base64!!!'), null);
+});
+
+test('listDiff reports common, exclusive and moved entries', () => {
+  const d = listDiff(['a', 'b', 'c'], ['b', 'a', 'd']);
+  assert.deepEqual(d.common.sort(), ['a', 'b']);
+  assert.deepEqual(d.onlyA, ['c']);
+  assert.deepEqual(d.onlyB, ['d']);
+  assert.deepEqual(d.moved, [{ id: 'a', from: 1, to: 2 }, { id: 'b', from: 2, to: 1 }]);
+  assert.deepEqual(listDiff([], []).moved, []);
 });

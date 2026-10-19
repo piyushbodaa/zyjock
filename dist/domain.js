@@ -491,6 +491,161 @@ export function capacityRows(records = []) {
   };
 }
 
+const median = values => {
+  if (!values.length) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+};
+const sortHistory = rows => [...rows].sort((a, b) => compareNumber(a.year, b.year) || roundRank(a.round) - roundRank(b.round));
+
+/**
+ * How closing ranks moved across rounds, per pool. Positive drift means the
+ * pool closed at a higher (easier) rank in its latest observation. Historical
+ * description only — later rounds differ in seats, rules and participants.
+ */
+export function roundDrift(records = [], options = {}, institutes = []) {
+  const map = instituteMap(institutes);
+  const wanted = (value, selected) => unrestricted(selected) || lower(value) === lower(selected);
+  const groups = new Map();
+  for (const record of records) {
+    if (record.recordKind !== 'cutoff') continue;
+    const closing = numberOrNull(record.closingRank);
+    if (closing == null) continue;
+    const inst = institution(record, map);
+    if (!wanted(record.category, options.category) || !wanted(record.quota, options.quota)
+      || !wanted(record.specialty, options.specialty) || !wanted(record.program, options.program)
+      || !wanted(inst.state || record.state, options.state) || !wanted(record.year, options.year)) continue;
+    const key = poolKeyOf(record);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  }
+  const pools = [...groups.values()].map(history => {
+    const sorted = sortHistory(history);
+    const first = sorted[0], last = sorted.at(-1);
+    const firstClosing = numberOrNull(first.closingRank), lastClosing = numberOrNull(last.closingRank);
+    const drift = sorted.length > 1 ? lastClosing - firstClosing : null;
+    return {
+      record: last, history: sorted, observations: sorted.length,
+      firstClosing, lastClosing, drift,
+      direction: drift == null ? 'single' : drift > 0 ? 'loosened' : drift < 0 ? 'tightened' : 'flat',
+    };
+  }).sort((a, b) => compareNumber(b.drift, a.drift));
+  const multi = pools.filter(p => p.drift != null);
+  const bySpecialty = new Map();
+  for (const p of multi) {
+    const key = p.record.specialty || p.record.course;
+    if (!bySpecialty.has(key)) bySpecialty.set(key, []);
+    bySpecialty.get(key).push(p.drift);
+  }
+  return {
+    pools, totalPools: pools.length, multiRoundPools: multi.length,
+    medianDrift: median(multi.map(p => p.drift)),
+    loosenedShare: multi.length ? multi.filter(p => p.drift > 0).length / multi.length : null,
+    bySpecialty: [...bySpecialty].map(([specialty, drifts]) => ({ specialty, pools: drifts.length, medianDrift: median(drifts) }))
+      .sort((a, b) => b.pools - a.pools),
+    note: 'Drift compares each pool\'s first and latest bundled closing AIR. Rounds differ in seats, rules and participants; past loosening does not promise future movement.',
+  };
+}
+
+/** Every cutoff pool for one institute, with ordered history and gap vs a rank. */
+export function poolHistory(records = [], instituteId, yourRank = null) {
+  const rank = numberOrNull(yourRank);
+  // Historical entities keep their own ids; seat rows link them via historyIds.
+  const linked = new Set();
+  for (const record of records) {
+    if (String(record.instituteId) === String(instituteId) && Array.isArray(record.historyIds)) {
+      for (const id of record.historyIds) linked.add(String(id));
+    }
+  }
+  const groups = new Map();
+  const seen = new Set();
+  for (const record of records) {
+    const mine = String(record.instituteId) === String(instituteId) || linked.has(String(record.id));
+    if (!mine || record.recordKind !== 'cutoff' || seen.has(String(record.id))) continue;
+    seen.add(String(record.id));
+    if (numberOrNull(record.closingRank) == null) continue;
+    const key = poolKeyOf(record);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  }
+  return [...groups.values()].map(history => {
+    const sorted = sortHistory(history);
+    const latest = sorted.at(-1);
+    const latestClosing = numberOrNull(latest.closingRank);
+    const bestClosing = Math.max(...sorted.map(r => numberOrNull(r.closingRank)));
+    return {
+      record: latest, course: latest.course, specialty: latest.specialty, program: latest.program,
+      quota: latest.quota, category: latest.category, history: sorted,
+      latestClosing, bestClosing,
+      gap: rank != null && rank > 0 ? latestClosing - rank : null,
+      bestGap: rank != null && rank > 0 ? bestClosing - rank : null,
+    };
+  }).sort((a, b) => compareNumber(a.latestClosing, b.latestClosing));
+}
+
+/* Shareable choice-list links: the whole list travels in the URL, no account. */
+const SHARE_TAGS = ['dream', 'target', 'backup'];
+
+export function buildSharePayload(list = {}, recordOf = () => null) {
+  const items = (Array.isArray(list.items) ? list.items : []).slice(0, 500).map(id => {
+    const record = recordOf(id) || {};
+    return [String(id), text(record.dataset) || 'mcc'];
+  });
+  const tags = {};
+  for (const [id] of items) if (SHARE_TAGS.includes(list.tags?.[id])) tags[id] = list.tags[id];
+  return { v: 1, app: 'zyjock', name: text(list.name).slice(0, 120) || 'Shared choice list', items, tags };
+}
+
+/** Validate an untrusted share payload. Returns a clean copy or null (fail closed). */
+export function parseSharePayload(input) {
+  if (!input || typeof input !== 'object' || input.v !== 1 || !Array.isArray(input.items)) return null;
+  if (input.items.length > 500) return null;
+  const items = [];
+  for (const entry of input.items) {
+    if (!Array.isArray(entry) || entry.length !== 2) return null;
+    const [id, dataset] = entry;
+    if (typeof id !== 'string' || !id || id.length > 200) return null;
+    if (typeof dataset !== 'string' || !/^(mcc|state:.+)$/.test(dataset) || dataset.length > 80) return null;
+    items.push([id, dataset]);
+  }
+  const tags = {};
+  if (input.tags && typeof input.tags === 'object') {
+    for (const [id] of items) if (SHARE_TAGS.includes(input.tags[id])) tags[id] = input.tags[id];
+  }
+  return { v: 1, app: 'zyjock', name: (typeof input.name === 'string' ? input.name.trim().slice(0, 120) : '') || 'Shared choice list', items, tags };
+}
+
+export function encodeShareToken(payload) {
+  const bytes = new TextEncoder().encode(JSON.stringify(payload));
+  let binary = '';
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+export function decodeShareToken(token) {
+  try {
+    if (typeof token !== 'string' || !/^[A-Za-z0-9_-]+$/.test(token) || token.length > 100000) return null;
+    const base64 = token.replace(/-/g, '+').replace(/_/g, '/') + '='.repeat((4 - token.length % 4) % 4);
+    const binary = atob(base64);
+    const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+    return new TextDecoder('utf-8', { fatal: true }).decode(bytes);
+  } catch { return null; }
+}
+
+/** Compare two ordered lists by record id. Positions are 1-based. */
+export function listDiff(aItems = [], bItems = []) {
+  const a = [...aItems], b = [...bItems];
+  const posA = new Map(a.map((id, i) => [id, i + 1])), posB = new Map(b.map((id, i) => [id, i + 1]));
+  const common = a.filter(id => posB.has(id));
+  return {
+    common,
+    onlyA: a.filter(id => !posB.has(id)),
+    onlyB: b.filter(id => !posA.has(id)),
+    moved: common.filter(id => posA.get(id) !== posB.get(id)).map(id => ({ id, from: posA.get(id), to: posB.get(id) })),
+  };
+}
+
 /** Factual checks over an ordered choice list. No chance or quality scores. */
 export function listCheck(items = []) {
   const warnings = [];

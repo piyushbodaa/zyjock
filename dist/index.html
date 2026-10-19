@@ -9,6 +9,8 @@
   <meta property="og:description" content="Explore colleges, compare historical cutoffs, and build your choice list. Every tool is free.">
   <title>Zyjock — Free NEET PG counselling tools</title>
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -18,5 +20,6 @@
   <div id="toast-root" class="toast-stack" role="status" aria-live="polite"></div>
   <noscript>Zyjock’s interactive tools need JavaScript. Official counselling information is available at <a href="https://mcc.nic.in/">MCC</a>.</noscript>
   <script type="module" src="./app.js"></script>
+  <script>if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))</script>
 </body>
 </html>

@@ -35,7 +35,9 @@ Browser workspaces are specific to each hostname. Use the workspace backup and r
 - The published 2026 MCC seat matrices beside separately dated, conservatively matched 2025 historical ranks.
 - Historical cutoff search and round comparisons, with source links on each observation.
 - Institution comparisons, reported financial examples, and a budget calculator using your own assumptions.
-- Unlimited choice lists, preference-based draft generation, reordering, CSV export and printing.
+- Unlimited choice lists with Dream/Target/Backup tags, list checks, duplication, side-by-side list comparison, shareable list links (the list travels in the URL — no account), preference-based draft generation, reordering, CSV export and printing.
+- A round-drift analyser (first vs latest closing rank per pool), a target-rank finder (every round a chosen institute closed at, with the gap vs your AIR), and a printable portal entry sheet with official institute/course codes.
+- Installable as an offline-capable PWA: after the first visit the workspace keeps working without a network connection.
 - Source-linked PG guidance, official notices and schedules, a checklist, personal reminders and calendar export.
 - CSV/JSON import, results export, and workspace backup/restore. Imported records remain labelled unverified.
 

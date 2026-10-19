@@ -8,6 +8,8 @@
 import {
   rankScan, qualifyingStatus, eligibilityChecks,
   instituteSummary, capacityRows, listCheck,
+  roundDrift, poolHistory, buildSharePayload, parseSharePayload,
+  encodeShareToken, decodeShareToken, listDiff,
 } from './domain.js';
 
 export function createFeatures(ctx) {
@@ -20,7 +22,8 @@ export function createFeatures(ctx) {
   const inst = id => ctx.inst(id), rec = id => ctx.rec(id);
   const unique = values => [...new Set(values.filter(v => v != null && v !== ''))].sort();
   let scanVisible = 36, instituteQuery = '', courseQuery = '', capacityVisible = 36;
-  let lastScan = null, lastChecks = null;
+  let lastScan = null, lastChecks = null, driftVisible = 36, pendingShare = null;
+  const signed = n => n == null ? '—' : (n > 0 ? '+' : '') + num(n);
 
   const scanInputs = () => S().scan || {};
   const bandLabel = band => band === 'reached'
@@ -225,6 +228,134 @@ export function createFeatures(ctx) {
       <p class="small text-muted">Tags are your own labels for ordering your research. They are not admission chances, and this check does not evaluate eligibility. Order still matters most: place every pool you would accept above every pool you would not.</p>`);
   }
 
+  function drift() {
+    const f = S().drift || {};
+    const d = roundDrift(allRecords(), f, allInstitutes());
+    const multi = d.pools.filter(p => p.drift != null);
+    const shown = multi.slice(0, driftVisible);
+    const cutoffs = allRecords().filter(r => r.recordKind === 'cutoff');
+    return heading('How cutoffs move between rounds.', 'First vs latest closing AIR for every pool observed in more than one round. History, not a forecast.')
+      + `<form id="drift-form" class="panel filters"><div class="toolbar">
+        ${selectField('specialty', 'Specialty', unique(cutoffs.map(r => r.specialty)), f.specialty || '')}
+        ${selectField('category', 'Seat category', unique(cutoffs.map(r => r.category)), f.category || '')}
+        ${selectField('quota', 'Quota', unique(cutoffs.map(r => r.quota)), f.quota || '')}
+        ${selectField('program', 'Programme', unique(cutoffs.map(r => r.program)), f.program || '')}
+        <div class="filter-buttons"><button class="btn primary">Analyse drift</button></div></div></form>
+      <div class="grid cols-4 section-gap">
+        <div class="stat-card"><span class="metric-label">Pools with 2+ rounds</span><strong class="metric-value">${num(d.multiRoundPools)}</strong><span class="small">of ${num(d.totalPools)} in scope</span></div>
+        <div class="stat-card"><span class="metric-label">Median drift</span><strong class="metric-value">${signed(d.medianDrift)}</strong><span class="small">Ranks, first → latest closing</span></div>
+        <div class="stat-card"><span class="metric-label">Pools that loosened</span><strong class="metric-value">${d.loosenedShare == null ? '—' : num(Math.round(d.loosenedShare * 100)) + '%'}</strong><span class="small">Closed beyond their first closing</span></div>
+        <div class="stat-card"><span class="metric-label">Reading drift</span><strong class="metric-value">+ = easier</strong><span class="small">Higher AIR got the seat later</span></div>
+      </div>
+      <section class="panel section-gap"><div class="panel-header"><h2>Median drift by specialty</h2><span class="small text-muted">Pools with 2+ observations</span></div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th>Specialty</th><th>Pools</th><th>Median drift (ranks)</th></tr></thead><tbody>
+      ${d.bySpecialty.slice(0, 15).map(s => `<tr><td>${e(s.specialty)}</td><td class="numeric">${num(s.pools)}</td><td class="numeric">${signed(s.medianDrift)}</td></tr>`).join('')}
+      </tbody></table></div></section>
+      <section class="panel section-gap"><div class="panel-header"><h2>Biggest movers</h2><span class="small text-muted">Sorted by loosening</span></div>
+      ${shown.length ? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Institute & specialty</th><th>Quota / category</th><th>Round-by-round closing AIR</th><th>Drift</th></tr></thead><tbody>
+      ${shown.map(p => `<tr><td>${collegeCell(p.record)}</td><td>${e(p.record.quota)}<br><span class="text-muted">${e(p.record.category)}</span></td><td><div class="round-history">${p.history.map(h => `<span class="chip">${e(h.round)} <strong>${num(h.closingRank)}</strong></span>`).join('')}</div></td><td class="numeric">${signed(p.drift)}</td></tr>`).join('')}
+      </tbody></table></div>` : empty('No multi-round pools in this scope', 'Widen the filters to see movement.', null)}
+      ${multi.length > driftVisible ? `<div class="toolbar section-gap">${btn('Show more pools', 'drift-more')}<span class="small text-muted">Showing ${driftVisible} of ${num(multi.length)}.</span></div>` : ''}
+      </section><p class="data-note">${e(d.note)}</p>`;
+  }
+
+  function target() {
+    const f = S().target || {};
+    const rank = f.rank || S().profile?.rank || '';
+    const matches = f.search
+      ? allInstitutes().filter(i => i.name.toLowerCase().includes(String(f.search).toLowerCase())).slice(0, 60)
+      : allInstitutes().slice(0, 25);
+    const candidates = (f.search
+      ? matches.map(i => ({ i, pools: poolHistory(allRecords(), i.id).length })).sort((a, b) => b.pools - a.pools)
+      : matches.map(i => ({ i, pools: 0 }))).slice(0, 25);
+    const chosen = f.instituteId ? inst(f.instituteId) : null;
+    const pools = chosen ? poolHistory(allRecords(), chosen.id, rank).filter(p => (!f.specialty || p.specialty === f.specialty) && (!f.category || p.category === f.category)) : [];
+    return heading('What rank did your target actually need?', 'Pick an institute. See every round it closed at — and the gap against your AIR.')
+      + `<section class="panel"><div class="panel-header"><h2>Find your target</h2><span class="badge success">FREE</span></div>
+      <form id="target-form" class="panel-body form-grid">
+        <label class="field"><span>Search institute</span><input name="search" placeholder="Type a college or hospital name…" value="${e(f.search || '')}"></label>
+        <label class="field"><span>Institute</span><select name="instituteId">${option('', candidates.length ? 'Select institute' : 'Search first', f.instituteId || '')}${candidates.map(({ i, pools }) => option(i.id, pools ? `${i.name} — ${pools} cutoff pools` : i.name, f.instituteId || '')).join('')}</select></label>
+        <label class="field"><span>Your NEET PG AIR (optional)</span><input name="rank" type="number" min="1" placeholder="For gap calculation" value="${e(rank)}"></label>
+        ${selectField('specialty', 'Specialty', unique(allRecords().filter(r => r.recordKind === 'cutoff').map(r => r.specialty)), f.specialty || '')}
+        ${selectField('category', 'Seat category', unique(allRecords().filter(r => r.recordKind === 'cutoff').map(r => r.category)), f.category || '')}
+        <button class="btn primary">Show closing history ${icon('arrow')}</button>
+      </form></section>`
+      + (chosen ? `<section class="panel section-gap"><div class="panel-header"><div><h2>${e(chosen.name)}</h2><span class="small text-muted">${e(chosen.state || '')} · ${num(pools.length)} cutoff pools${rank ? ` · your AIR ${num(Number(rank))}` : ''}</span></div>${btn('Full profile', 'institute-profile', 'secondary', `data-id="${e(chosen.id)}"`)}</div>
+        ${pools.length ? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Course</th><th>Quota / category</th><th>Closing AIR by round</th><th>Latest gap vs you</th></tr></thead><tbody>
+        ${pools.map(p => `<tr><td>${e(p.course)}</td><td>${e(p.quota)}<br><span class="text-muted">${e(p.category)}</span></td><td><div class="round-history">${p.history.map(h => `<span class="chip">${e(h.year)} ${e(h.round)} <strong>${num(h.closingRank)}</strong></span>`).join('')}</div></td><td class="numeric">${p.gap == null ? 'Enter AIR' : p.gap >= 0 ? `<span class="badge success">Closed ${num(p.gap)} beyond you</span>` : `<span class="badge warning">Needed ${num(-p.gap)} better</span>`}</td></tr>`).join('')}
+        </tbody></table></div><p class="small text-muted panel-body">“Gap” compares your AIR with the latest bundled closing rank only. The easiest historical closing for a pool may be in an earlier round — read every chip before deciding.</p>` : empty('No cutoff pools match', 'This institute may have no bundled historical observations for that specialty/category.', null)}
+        </section>` : '<p class="data-note section-gap">Search, pick the institute, and run it. Add your AIR to see the gap in ranks for every pool.</p>');
+  }
+
+  function sheet() {
+    const list = ctx.selectedList();
+    const rows = (list?.items || []).map(rec).filter(Boolean);
+    const today = new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' });
+    return heading('Portal entry sheet.', 'Your list in entry order, with the official codes to type into the counselling portal. Print it, tick as you go.', btn('Print sheet', 'print-list', 'primary'))
+      + `<section class="panel entry-sheet"><div class="panel-header"><div><h2>${e(list?.name || 'Choice list')}</h2><span class="small text-muted">Prepared ${e(today)} · ${num(rows.length)} choices · Verify every code on the official portal before locking</span></div></div>
+      ${rows.length ? `<div class="table-wrap"><table class="data-table"><thead><tr><th>#</th><th>Institute code</th><th>Institute</th><th>Course code</th><th>Course</th><th>Quota / category</th><th>Entered ☐</th><th>Verified ☐</th></tr></thead><tbody>
+      ${rows.map((r, i) => { const it = inst(r.instituteId); return `<tr><td class="numeric">${i + 1}</td><td><strong>${e(it.instituteCode || '—')}</strong></td><td>${e(it.name)}<br><span class="small text-muted">${e(it.state || '')}</span></td><td><strong>${e(r.courseCode || '—')}</strong></td><td>${e(r.course)}</td><td>${e(r.quota)}<br><span class="text-muted">${e(r.category)}</span></td><td>☐</td><td>☐</td></tr>`; }).join('')}
+      </tbody></table></div><div class="panel-body"><p class="small">Order is your preference order — the portal allots the first available choice, so never place a pool you would refuse above one you would accept. Codes marked “—” were not printed in the bundled source; find them in the portal search. This sheet does not submit anything.</p><p>${btn('Print / save PDF', 'print-list', 'primary')} <a class="btn subtle" href="#choices">Back to my lists</a></p></div>`
+        : empty('Your active list is empty', 'Save colleges first, then print the entry sheet.', null)}
+      </section>`;
+  }
+
+  function shareUrl(list) {
+    const token = encodeShareToken(buildSharePayload(list, id => rec(id)));
+    return `${location.origin}${location.pathname}#share=${token}`;
+  }
+
+  function shareModal() {
+    const list = ctx.selectedList();
+    if (!list?.items.length) { toast('Add choices before sharing a list.', 'warning'); return; }
+    const url = shareUrl(list);
+    openModal('Share this choice list', `<p>Anyone opening this link can save “${e(list.name)}” (${num(list.items.length)} choices) as their own list. No account, no server — the list travels inside the link itself.</p>
+      <label class="field"><span>Share link</span><input id="share-url" readonly value="${e(url)}"></label>
+      <p class="small text-muted">The link contains record IDs and tags only — no personal data. It can be long; that is normal. Receivers get their own copy and cannot change yours.</p>`,
+      btn('Copy link', 'copy-share', 'primary'));
+  }
+
+  function compareListsModal() {
+    const lists = S().lists || [];
+    if (lists.length < 2) { toast('Create or duplicate a second list to compare.', 'warning'); return; }
+    openModal('Compare two lists', `<form id="compare-lists-form">
+      <label class="field"><span>List A</span><select name="a">${lists.map(l => option(l.id, `${l.name} (${l.items.length})`, S().activeList)).join('')}</select></label>
+      <label class="field"><span>List B</span><select name="b">${lists.map((l, i) => option(l.id, `${l.name} (${l.items.length})`, lists.find(x => x.id !== S().activeList)?.id || lists[1].id)).join('')}</select></label>
+      <button class="btn primary">Compare</button><div id="compare-lists-result" aria-live="polite"></div></form>`);
+  }
+
+  function compareListsResult(aId, bId) {
+    const a = S().lists.find(l => l.id === aId), b = S().lists.find(l => l.id === bId);
+    if (!a || !b || a.id === b.id) return '<p class="data-note">Pick two different lists.</p>';
+    const d = listDiff(a.items, b.items);
+    const label = id => { const r = rec(id); return r ? `${inst(r.instituteId).name} — ${r.course}` : id; };
+    const section = (title, ids, extra = () => '') => ids.length ? `<h3 class="section-gap">${e(title)} (${ids.length})</h3><ul>${ids.map(id => `<li>${e(label(id))}${extra(id)}</li>`).join('')}</ul>` : '';
+    return `<p class="section-gap"><strong>${e(a.name)}</strong> vs <strong>${e(b.name)}</strong>: ${num(d.common.length)} shared, ${num(d.moved.length)} in a different position.</p>`
+      + section('Only in ' + a.name, d.onlyA) + section('Only in ' + b.name, d.onlyB)
+      + (d.moved.length ? `<h3 class="section-gap">Moved</h3><ul>${d.moved.map(m => `<li>${e(label(m.id))}: #${m.from} → #${m.to}</li>`).join('')}</ul>` : '<p class="small text-muted">Shared choices keep the same relative positions.</p>');
+  }
+
+  async function maybeImportShare() {
+    const match = location.hash.match(/#share=([A-Za-z0-9_-]+)/);
+    if (!match) return;
+    history.replaceState(null, '', location.pathname + location.search);
+    let payload = null;
+    try { payload = parseSharePayload(JSON.parse(decodeShareToken(match[1]))); } catch { payload = null; }
+    if (!payload) { toast('That share link could not be read. Ask for a fresh copy.', 'warning'); return; }
+    for (const dataset of [...new Set(payload.items.map(([, ds]) => ds).filter(ds => ds !== 'mcc'))]) {
+      try { await ctx.loadDataset(dataset); } catch { /* unresolved rows are reported below */ }
+    }
+    ctx.refreshCatalog();
+    const resolved = payload.items.filter(([id]) => rec(id));
+    pendingShare = { payload, resolvedIds: resolved.map(([id]) => id) };
+    openModal('Shared choice list', `<p><strong>${e(payload.name)}</strong> — ${num(resolved.length)} of ${num(payload.items.length)} choices found in the current datasets.</p>
+      ${resolved.length < payload.items.length ? '<p class="data-note">Some choices belong to datasets or snapshots not bundled here and will be skipped.</p>' : ''}
+      <ul>${resolved.slice(0, 12).map(([id]) => { const r = rec(id); return `<li>${e(inst(r.instituteId).name)} — ${e(r.course)}</li>`; }).join('')}</ul>
+      ${resolved.length > 12 ? `<p class="small text-muted">…and ${num(resolved.length - 12)} more.</p>` : ''}
+      <p class="small text-muted">Saving creates a new list in this browser. It never overwrites your lists, and it is still only a planning list.</p>`,
+      btn('Save as my list', 'import-share', 'primary', resolved.length ? '' : 'disabled'));
+  }
+
   async function action(a, id, dataset = {}) {
     if (a === 'institute-profile') { instituteProfile(id); return true; }
     if (a === 'scan-more') { scanVisible += 36; ctx.render(); return true; }
@@ -247,6 +378,23 @@ export function createFeatures(ctx) {
       return true;
     }
     if (a === 'list-check') { listCheckModal(); return true; }
+    if (a === 'drift-more') { driftVisible += 36; ctx.render(); return true; }
+    if (a === 'share-list') { shareModal(); return true; }
+    if (a === 'compare-lists') { compareListsModal(); return true; }
+    if (a === 'copy-share') {
+      const input = document.querySelector('#share-url');
+      try { await navigator.clipboard.writeText(input.value); toast('Share link copied.'); }
+      catch { input.select(); document.execCommand('copy'); toast('Share link copied.'); }
+      return true;
+    }
+    if (a === 'import-share') {
+      if (!pendingShare?.resolvedIds.length) return true;
+      const list = { id: ID(), name: pendingShare.payload.name + ' (shared)', items: [...pendingShare.resolvedIds], tags: { ...pendingShare.payload.tags } };
+      S().lists.push(list); S().activeList = list.id; pendingShare = null;
+      ctx.save(); ctx.closeModal(); ctx.navigate('choices');
+      toast('Shared list saved as your own copy.');
+      return true;
+    }
     return false;
   }
 
@@ -256,6 +404,9 @@ export function createFeatures(ctx) {
     if (id === 'institute-search') { instituteQuery = values.search || ''; ctx.render(); return true; }
     if (id === 'course-search') { courseQuery = values.search || ''; ctx.render(); return true; }
     if (id === 'eligibility-form') { S().eligibility = values; lastChecks = eligibilityChecks(values, D().scoreScale || {}); ctx.save(); ctx.render(); return true; }
+    if (id === 'drift-form') { S().drift = values; driftVisible = 36; ctx.save(); ctx.render(); return true; }
+    if (id === 'target-form') { S().target = values; ctx.save(); ctx.render(); return true; }
+    if (id === 'compare-lists-form') { document.querySelector('#compare-lists-result').innerHTML = compareListsResult(values.a, values.b); return true; }
     return false;
   }
 
@@ -271,6 +422,6 @@ export function createFeatures(ctx) {
     return false;
   }
 
-  return { predictor, institutes, courses, seatchanges, eligibility, instituteProfile, tagSelect, action, submit, change };
+  return { predictor, institutes, courses, seatchanges, eligibility, drift, target, sheet, instituteProfile, tagSelect, maybeImportShare, action, submit, change };
 }
 
