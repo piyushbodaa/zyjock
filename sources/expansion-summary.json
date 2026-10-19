@@ -1,0 +1,25 @@
+{
+  "jurisdictions": 28,
+  "jurisdictionsWithRecords": 13,
+  "stateRecords": 6834,
+  "stateCutoffRecords": 5611,
+  "stateSeatRecords": 1223,
+  "financialReports": 2684,
+  "financialStates": 30,
+  "financialInstitutions": 250,
+  "fields": {
+    "annualFee": 2517,
+    "monthlyStipend": 128,
+    "bondYears": 12,
+    "bondPenalty": 10
+  },
+  "checkedAt": "2026-10-19",
+  "complete": false,
+  "unpublishedRecords": 2127,
+  "unpublishedJurisdictions": [
+    "Andaman and Nicobar Islands",
+    "Andhra Pradesh",
+    "Karnataka",
+    "Kerala"
+  ]
+}

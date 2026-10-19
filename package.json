@@ -1,8 +1,13 @@
 {
   "name": "zyjock",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "type": "module",
-  "description": "Free counselling exploration and planning workspace",
-  "scripts": { "dev": "python -m http.server 4173 --bind 127.0.0.1 --directory dist" }
+  "description": "Free, open-source NEET PG counselling exploration and planning workspace",
+  "scripts": {
+    "dev": "python -m http.server 4173 --bind 127.0.0.1 --directory dist",
+    "test": "node --test tests/",
+    "build:data": "python3 sources/build_pg_site.py"
+  }
 }

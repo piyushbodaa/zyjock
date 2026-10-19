@@ -1,0 +1,611 @@
+{
+  "states": [
+    {
+      "name": "Delhi",
+      "authority": "Faculty of Medical Sciences, University of Delhi; MCC for seat allotment",
+      "authorityUrl": "https://www.fmsc.du.ac.in/courses?tab=113",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "2026 DU bulletin and seat-position document linked; university tuition and VMMC tuition/withdrawal terms extracted. DU internal seats are already represented in MCC; scanned DU matrix is not duplicated. IPU and all institution-level financial terms remain incomplete.",
+      "documents": [
+        {
+          "title": "DU 2026 PG information bulletin",
+          "url": "https://storage.googleapis.com/dudocsfmsc/1791371447114-BOI_2026.pdf",
+          "year": 2026,
+          "kind": "prospectus"
+        },
+        {
+          "title": "DU 2026 MD/MS seat position",
+          "url": "https://storage.googleapis.com/dudocsfmsc/1791364522323-MD_MS_SEAT_MATRIX___Sign__1_.pdf",
+          "year": 2026,
+          "kind": "seat-matrix"
+        },
+        {
+          "title": "VMMC fees and pay structure (effective 2024–25 onward)",
+          "url": "https://vmmc-sjh.mohfw.gov.in/sites/default/files/Notice%20dated%2018.07.2025%20-%20Fee%20and%20Pay%20Structure%20for%20MD-MS-DM-MCH%20Courses%20of%20VMMC%20%26%20Safdarjung%20Hospital%20from%20Academic%20Session%202024-25%20onwards.pdf",
+          "year": 2025,
+          "kind": "financial-policy"
+        }
+      ]
+    },
+    {
+      "name": "Chandigarh",
+      "authority": "Government Medical College and Hospital, Chandigarh",
+      "authorityUrl": "https://www.gmch.gov.in/admission-mdms-2026",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "Official 2026 prospectus linked. GMCH fee observations are present in the main PG collection. Additional UT/institutional category seat extraction and stipend amount are pending.",
+      "documents": [
+        {
+          "title": "GMCH MD/MS 2026 prospectus",
+          "url": "https://www.gmch.gov.in/sites/default/files/documents/approved%20prospectus.pdf",
+          "year": 2026,
+          "kind": "prospectus"
+        }
+      ]
+    },
+    {
+      "name": "Haryana",
+      "authority": "Pandit Bhagwat Dayal Sharma University of Health Sciences, Rohtak",
+      "authorityUrl": "https://www.uhsr.ac.in/",
+      "checkedAt": "2026-10-19",
+      "status": "documents-linked",
+      "coverageNote": "Official 2025 admission amendment and provisional round-2 allotment located. Portal/PDF retrieval timed out; numerical state seats, final ranks and financial policies have not been imported.",
+      "documents": [
+        {
+          "title": "MD/MS admission procedure amendment, 16 December 2025",
+          "url": "https://www.uhsr.ac.in/writereaddata/upload/DECEMBER2025/171225mmunotification.pdf",
+          "year": 2025,
+          "kind": "admission-policy"
+        },
+        {
+          "title": "2025 provisional round-2 allotment",
+          "url": "https://www.uhsr.ac.in/writereaddata/upload/DECEMBER2025/221225provisionalallitment.pdf",
+          "year": 2025,
+          "kind": "allotment"
+        }
+      ]
+    },
+    {
+      "name": "Punjab",
+      "authority": "Baba Farid University of Health Sciences",
+      "authorityUrl": "https://bfuhs.ac.in/mdms/mdms.asp",
+      "checkedAt": "2026-10-19",
+      "status": "authority-linked",
+      "coverageNote": "Official PG archive identified, but returned server errors and its indexed 2025 prospectus path returned 404. No Punjab numerical state dataset or fee quote has been inferred from third-party sites.",
+      "documents": [
+        {
+          "title": "Official MD/MS admission archive",
+          "url": "https://bfuhs.ac.in/mdms/mdms.asp",
+          "year": 2026,
+          "kind": "authority-notices"
+        }
+      ]
+    },
+    {
+      "name": "Himachal Pradesh",
+      "authority": "Atal Medical and Research University",
+      "authorityUrl": "https://amruhp.ac.in/counselling-notifications/",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "All five 2025 final allotment lists aggregated without candidate identities: round 1, 2, 3, stray and second stray. Rank values are state merit numbers, not AIR. Government annual tuition extracted. Scanned category matrix and institution-specific stipend/bonds are pending.",
+      "documents": [
+        {
+          "title": "2025 MD/MS/DNB prospectus",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2025/10/Final-Corrected-PG-MD-MS-2025-merged-prospcus-for-website.pdf",
+          "year": 2025,
+          "kind": "prospectus"
+        },
+        {
+          "title": "2025 State quota matrix",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2025/11/final-state-quota-seat-matrix-for-PG-MD-MS-DNB-for-state-quota-for-website-2025.pdf",
+          "year": 2025,
+          "kind": "seat-matrix"
+        },
+        {
+          "title": "2025 r1",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2025/11/Final-Seat-Allocation-of-MD-MS-DNB-1st-round-Counselling-2025-merged.pdf",
+          "year": 2025,
+          "kind": "final-allotment"
+        },
+        {
+          "title": "2025 r2",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2025/12/Final-Seat-Allocation-of-MD-MS-DNB-2nd-Round-Counselling-2025-merged.pdf",
+          "year": 2025,
+          "kind": "final-allotment"
+        },
+        {
+          "title": "2025 r3",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2026/02/Final-Seat-Allocation-of-MD-MS-DNB-3rd-round-Counselling-2025-merged.pdf",
+          "year": 2025,
+          "kind": "final-allotment"
+        },
+        {
+          "title": "2025 stray",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2026/02/Final-Seat-Allocation-of-MD-MS-DNB-Stray-Round-Counselling-2025-merged.pdf",
+          "year": 2025,
+          "kind": "final-allotment"
+        },
+        {
+          "title": "2025 stray2",
+          "url": "https://amruhp.ac.in/wp-content/uploads/2026/02/Final-Seat-allocation-of-MD-MS-DNB-2nd-Stray-Round-counselling-2025-merged.pdf",
+          "year": 2025,
+          "kind": "final-allotment"
+        }
+      ]
+    },
+    {
+      "name": "Jammu and Kashmir",
+      "authority": "Jammu and Kashmir Board of Professional Entrance Examinations",
+      "authorityUrl": "https://www.jkbopee.gov.in/",
+      "checkedAt": "2026-10-19",
+      "status": "documents-linked",
+      "coverageNote": "2026 J&K/Ladakh registration notice verified. State seat matrices, allotment-derived closing ranks, and financial policies are not yet imported.",
+      "documents": [
+        {
+          "title": "J&K/Ladakh NEET PG 2026 registration for provisional merit list",
+          "url": "https://www.jkbopee.gov.in/Pdf/Downloader.ashx?nid=19267&type=n",
+          "year": 2026,
+          "kind": "registration-notice"
+        }
+      ]
+    },
+    {
+      "name": "Ladakh",
+      "authority": "JKBOPEE — joint J&K/Ladakh NEET PG registration",
+      "authorityUrl": "https://www.jkbopee.gov.in/",
+      "checkedAt": "2026-10-19",
+      "status": "documents-linked",
+      "coverageNote": "2026 notice explicitly covers J&K/Ladakh candidates. No separate Ladakh numerical counselling dataset has been imported; this does not assert that PG seats or nominations are absent.",
+      "documents": [
+        {
+          "title": "J&K/Ladakh NEET PG 2026 registration for provisional merit list",
+          "url": "https://www.jkbopee.gov.in/Pdf/Downloader.ashx?nid=19267&type=n",
+          "year": 2026,
+          "kind": "registration-notice"
+        }
+      ]
+    },
+    {
+      "name": "Uttarakhand",
+      "authority": "H.N.B. Uttarakhand Medical Education University",
+      "authorityUrl": "https://www.hnbumu.ac.in/",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "Official DME PG bond format linked and its two-year service/₹2.5 crore obligation extracted as an undated published form, not a blanket current rule for every college. Current HNBUMU seat/rank data and course fees/stipends remain pending.",
+      "documents": [
+        {
+          "title": "Official PG (MD/MS) bond format",
+          "url": "https://cdnbbsr.s3waas.gov.in/s37e05d6f828574fbc975a896b25bb011e/uploads/2025/02/202502181772456066.pdf",
+          "year": 2025,
+          "kind": "bond-format"
+        },
+        {
+          "title": "DME bond order register",
+          "url": "https://medicaleducation.uk.gov.in/document-category/orders-and-circulars/",
+          "year": 2025,
+          "kind": "financial-policy"
+        }
+      ]
+    },
+    {
+      "name": "Uttar Pradesh",
+      "authority": "Directorate General Medical Education and Training, Uttar Pradesh",
+      "authorityUrl": "https://upneet.gov.in/",
+      "checkedAt": "2026-10-19",
+      "status": "documents-linked",
+      "coverageNote": "Official portal currently lists 2026 PG brochure/policy. MD/MS state matrices, allotments and institutional finance tables have not been imported; MDS/UG data were excluded.",
+      "documents": [
+        {
+          "title": "Official UP counselling notices",
+          "url": "https://upneet.gov.in/Newsandevent2.aspx",
+          "year": 2026,
+          "kind": "authority-notices"
+        },
+        {
+          "title": "Historical 2025 PG brochure",
+          "url": "https://upneet.gov.in/PDFFile/NEETPG-2025Brochure.pdf",
+          "year": 2025,
+          "kind": "prospectus"
+        }
+      ]
+    },
+    {
+      "name": "Assam",
+      "authority": "Directorate of Medical Education, Assam",
+      "authorityUrl": "https://dme.assam.gov.in/latest/admission-notice-ugpgothersnew",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "2025 round-2 provisional selections aggregated by institution/course/allotted quota, using revised state merit rank (not AIR). NA choices excluded; admission remains conditional on verification. 2026 notices linked; complete current state matrices, fees and stipend/bond policies pending.",
+      "documents": [
+        {
+          "title": "2025 provisional round-2 select list",
+          "url": "https://dme.assam.gov.in/sites/default/files/swf_utility_folder/departments/dme_lipl_in_oid_8/latest/admission_notice-neet-pg2025_round-2.pdf",
+          "year": 2025,
+          "kind": "provisional-allotment"
+        },
+        {
+          "title": "2026 first PG counselling notice and merit list",
+          "url": "https://dme.assam.gov.in/sites/default/files/swf_utility_folder/departments/dme_lipl_in_oid_8/latest/notice_1st_pg_counselling_provisional_merit_list_of_neet-pg-2026.pdf",
+          "year": 2026,
+          "kind": "counselling-notice"
+        }
+      ]
+    },
+    {
+      "name": "Arunachal Pradesh",
+      "authority": "Directorate of Medical Education, Training and Research",
+      "authorityUrl": "https://dmetrap.in/",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "All 13 state-quota seats from the 16 October 2026 TRIHMS advertisement entered. MD/MS categories follow a 200-point roster; the advertisement does not enumerate category counts. Numeric bond terms and wider stipend/fee coverage pending.",
+      "documents": [
+        {
+          "title": "2026 TRIHMS state quota counselling seat advertisement",
+          "url": "https://dmetrap.in/wp-content/uploads/2026/10/Advertisement-PG-2026-1.pdf",
+          "year": 2026,
+          "kind": "seat-matrix"
+        }
+      ]
+    },
+    {
+      "name": "Manipur",
+      "authority": "JNIMS Imphal; Regional Institute of Medical Sciences; state medical authorities",
+      "authorityUrl": "https://jnims.nic.in/",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "JNIMS 2025 official PG fees, stipends and course-leaving terms extracted separately for direct/institutional and in-service entrants. RIMS regional nomination pools and full state allotment datasets are not imported.",
+      "documents": [
+        {
+          "title": "JNIMS PG prospectus 2025",
+          "url": "https://jnims.nic.in/wp-content/uploads/2025/12/pg-prospectus-25.pdf",
+          "year": 2025,
+          "kind": "prospectus"
+        }
+      ]
+    },
+    {
+      "name": "Meghalaya",
+      "authority": "NEIGRIHMS — institutional and Northeast category counselling",
+      "authorityUrl": "https://www.neigrihms.gov.in/examsnotification.html",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "2026 NEIGRIHMS institutional/open Northeast matrix extracted: 17 seats outside the 20 AIQ seats already represented by MCC. Annual tuition and discontinuation terms extracted. This regional institutional pool is not presented as a Meghalaya-only state quota.",
+      "documents": [
+        {
+          "title": "NEIGRIHMS MD/MS prospectus 2026–27",
+          "url": "https://www.neigrihms.gov.in/Latest News/academics/2026/PG/PG 2026-27/Prospectus PG MD MS 2026-2027.pdf",
+          "year": 2026,
+          "kind": "prospectus"
+        }
+      ]
+    },
+    {
+      "name": "Mizoram",
+      "authority": "Department of Higher and Technical Education; Zoram Medical College",
+      "authorityUrl": "https://dhte.mizoram.gov.in/",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "Zoram Medical College official PG stipend and one-year post-course service bond extracted. Institution seat-intake page and state PG notices linked; intake totals are not treated as counselling category availability.",
+      "documents": [
+        {
+          "title": "ZMC official PG admission notices",
+          "url": "https://zmc.edu.in/pages/pg-admission-news",
+          "year": 2026,
+          "kind": "authority-notices"
+        },
+        {
+          "title": "ZMC PG stipend and bond disclosure",
+          "url": "https://zmc.edu.in/pages/remunerationstipend-and-bonds",
+          "year": 2026,
+          "kind": "financial-policy"
+        },
+        {
+          "title": "ZMC permitted PG intake (not counselling availability)",
+          "url": "https://zmc.edu.in/pages/list-of-pg-courses-along-with-number-of-seats-permitted-by-nmc",
+          "year": 2026,
+          "kind": "sanctioned-intake"
+        }
+      ]
+    },
+    {
+      "name": "Nagaland",
+      "authority": "Directorate of Health and Family Welfare, Nagaland",
+      "authorityUrl": "https://nagahealth.nagaland.gov.in/notification/",
+      "checkedAt": "2026-10-19",
+      "status": "authority-linked",
+      "coverageNote": "Official state health authority verified through Nagaland government directory. No numerical state PG allotment/matrix or PG-specific finance order has yet been imported. General student scholarships are not treated as residency stipends.",
+      "documents": [
+        {
+          "title": "Nagaland government official department directory",
+          "url": "https://nagaland.gov.in/gov-websites",
+          "year": 2026,
+          "kind": "authority-directory"
+        }
+      ]
+    },
+    {
+      "name": "Sikkim",
+      "authority": "Sikkim Manipal Institute of Medical Sciences — official institutional counselling notices",
+      "authorityUrl": "https://www.smu.edu.in/notice-board.php",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "Complete SMIMS initial 2025 published General/Management matrix and specialty-specific annual fees transcribed. Historical 2025 seats are not live vacancies or a 2026 fee quote. Government nomination routes and PG stipend/bond policies remain incomplete.",
+      "documents": [
+        {
+          "title": "SMIMS initial MD/MS seat matrix and fees 2025",
+          "url": "https://www.smu.edu.in/img/pdf/notice-board/MDMS-SEAT-MATRIX-FEE-STRUCTURE-2025.pdf",
+          "year": 2025,
+          "kind": "seat-matrix-and-fees"
+        },
+        {
+          "title": "SMIMS round-2 matrix and fees 2025",
+          "url": "https://www.smu.edu.in/img/pdf/notice-board/MDMS-SEAT-MATRIX-AND-FEE-STRUCTURE-ROUND-II-2025.pdf",
+          "year": 2025,
+          "kind": "seat-matrix-and-fees"
+        }
+      ]
+    },
+    {
+      "name": "Tripura",
+      "authority": "Tripura Medical Counselling Committee",
+      "authorityUrl": "https://trmcc.admissions.nic.in/pg-counselling/",
+      "checkedAt": "2026-10-19",
+      "status": "partial",
+      "coverageNote": "Complete Annexure C positive pools from 2025 bulletin extracted: AGMC 46, TMC 8, LGBRIMH nomination 1, IGM diploma 10. Historical counts, not live vacancies. Current financial terms and all-round cutoff histories remain pending.",
+      "documents": [
+        {
+          "title": "Tripura postgraduate medical counselling bulletin 2025",
+          "url": "https://cdnbbsr.s3waas.gov.in/s337e3ca9768a106f686626a07db6facff/uploads/2025/11/202511071736707248.pdf",
+          "year": 2025,
+          "kind": "prospectus"
+        }
+      ]
+    }
+  ],
+  "financials": [
+    {
+      "id": "pg-fin-north-uttarakhand-bond-form",
+      "state": "Uttarakhand",
+      "scope": "Candidates who execute the published Uttarakhand PG medical bond form; applicability must be checked in the current college prospectus",
+      "title": "Uttarakhand DME published MD/MS service bond form",
+      "year": 2025,
+      "program": "MD/MS",
+      "annualFee": null,
+      "monthlyStipend": null,
+      "bondYears": 2,
+      "bondPenalty": 25000000,
+      "discontinuationPenalty": 25000000,
+      "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s37e05d6f828574fbc975a896b25bb011e/uploads/2025/02/202502181772456066.pdf",
+      "sourcePage": 1,
+      "dataStatus": "verified",
+      "notes": "Official undated form published in the DME register (upload path February 2025): two years in a government hospital/health centre in a hilly region; ₹2.5 crore for discontinuing study or failing the service obligation. This is a form-specific obligation; no claim that all 2026 entrants/colleges sign it."
+    }
+  ],
+  "sources": [
+    {
+      "id": "delhi-0",
+      "title": "DU 2026 PG information bulletin",
+      "url": "https://storage.googleapis.com/dudocsfmsc/1791371447114-BOI_2026.pdf",
+      "year": 2026,
+      "scope": "Delhi"
+    },
+    {
+      "id": "delhi-1",
+      "title": "DU 2026 MD/MS seat position",
+      "url": "https://storage.googleapis.com/dudocsfmsc/1791364522323-MD_MS_SEAT_MATRIX___Sign__1_.pdf",
+      "year": 2026,
+      "scope": "Delhi"
+    },
+    {
+      "id": "delhi-2",
+      "title": "VMMC fees and pay structure (effective 2024–25 onward)",
+      "url": "https://vmmc-sjh.mohfw.gov.in/sites/default/files/Notice%20dated%2018.07.2025%20-%20Fee%20and%20Pay%20Structure%20for%20MD-MS-DM-MCH%20Courses%20of%20VMMC%20%26%20Safdarjung%20Hospital%20from%20Academic%20Session%202024-25%20onwards.pdf",
+      "year": 2025,
+      "scope": "Delhi"
+    },
+    {
+      "id": "chandigarh-0",
+      "title": "GMCH MD/MS 2026 prospectus",
+      "url": "https://www.gmch.gov.in/sites/default/files/documents/approved%20prospectus.pdf",
+      "year": 2026,
+      "scope": "Chandigarh"
+    },
+    {
+      "id": "haryana-0",
+      "title": "MD/MS admission procedure amendment, 16 December 2025",
+      "url": "https://www.uhsr.ac.in/writereaddata/upload/DECEMBER2025/171225mmunotification.pdf",
+      "year": 2025,
+      "scope": "Haryana"
+    },
+    {
+      "id": "haryana-1",
+      "title": "2025 provisional round-2 allotment",
+      "url": "https://www.uhsr.ac.in/writereaddata/upload/DECEMBER2025/221225provisionalallitment.pdf",
+      "year": 2025,
+      "scope": "Haryana"
+    },
+    {
+      "id": "punjab-0",
+      "title": "Official MD/MS admission archive",
+      "url": "https://bfuhs.ac.in/mdms/mdms.asp",
+      "year": 2026,
+      "scope": "Punjab"
+    },
+    {
+      "id": "himachal-pradesh-0",
+      "title": "2025 MD/MS/DNB prospectus",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2025/10/Final-Corrected-PG-MD-MS-2025-merged-prospcus-for-website.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "himachal-pradesh-1",
+      "title": "2025 State quota matrix",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2025/11/final-state-quota-seat-matrix-for-PG-MD-MS-DNB-for-state-quota-for-website-2025.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "himachal-pradesh-2",
+      "title": "2025 r1",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2025/11/Final-Seat-Allocation-of-MD-MS-DNB-1st-round-Counselling-2025-merged.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "himachal-pradesh-3",
+      "title": "2025 r2",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2025/12/Final-Seat-Allocation-of-MD-MS-DNB-2nd-Round-Counselling-2025-merged.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "himachal-pradesh-4",
+      "title": "2025 r3",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2026/02/Final-Seat-Allocation-of-MD-MS-DNB-3rd-round-Counselling-2025-merged.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "himachal-pradesh-5",
+      "title": "2025 stray",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2026/02/Final-Seat-Allocation-of-MD-MS-DNB-Stray-Round-Counselling-2025-merged.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "himachal-pradesh-6",
+      "title": "2025 stray2",
+      "url": "https://amruhp.ac.in/wp-content/uploads/2026/02/Final-Seat-allocation-of-MD-MS-DNB-2nd-Stray-Round-counselling-2025-merged.pdf",
+      "year": 2025,
+      "scope": "Himachal Pradesh"
+    },
+    {
+      "id": "jammu-and-kashmir-0",
+      "title": "J&K/Ladakh NEET PG 2026 registration for provisional merit list",
+      "url": "https://www.jkbopee.gov.in/Pdf/Downloader.ashx?nid=19267&type=n",
+      "year": 2026,
+      "scope": "Jammu and Kashmir"
+    },
+    {
+      "id": "ladakh-0",
+      "title": "J&K/Ladakh NEET PG 2026 registration for provisional merit list",
+      "url": "https://www.jkbopee.gov.in/Pdf/Downloader.ashx?nid=19267&type=n",
+      "year": 2026,
+      "scope": "Ladakh"
+    },
+    {
+      "id": "uttarakhand-0",
+      "title": "Official PG (MD/MS) bond format",
+      "url": "https://cdnbbsr.s3waas.gov.in/s37e05d6f828574fbc975a896b25bb011e/uploads/2025/02/202502181772456066.pdf",
+      "year": 2025,
+      "scope": "Uttarakhand"
+    },
+    {
+      "id": "uttarakhand-1",
+      "title": "DME bond order register",
+      "url": "https://medicaleducation.uk.gov.in/document-category/orders-and-circulars/",
+      "year": 2025,
+      "scope": "Uttarakhand"
+    },
+    {
+      "id": "uttar-pradesh-0",
+      "title": "Official UP counselling notices",
+      "url": "https://upneet.gov.in/Newsandevent2.aspx",
+      "year": 2026,
+      "scope": "Uttar Pradesh"
+    },
+    {
+      "id": "uttar-pradesh-1",
+      "title": "Historical 2025 PG brochure",
+      "url": "https://upneet.gov.in/PDFFile/NEETPG-2025Brochure.pdf",
+      "year": 2025,
+      "scope": "Uttar Pradesh"
+    },
+    {
+      "id": "assam-0",
+      "title": "2025 provisional round-2 select list",
+      "url": "https://dme.assam.gov.in/sites/default/files/swf_utility_folder/departments/dme_lipl_in_oid_8/latest/admission_notice-neet-pg2025_round-2.pdf",
+      "year": 2025,
+      "scope": "Assam"
+    },
+    {
+      "id": "assam-1",
+      "title": "2026 first PG counselling notice and merit list",
+      "url": "https://dme.assam.gov.in/sites/default/files/swf_utility_folder/departments/dme_lipl_in_oid_8/latest/notice_1st_pg_counselling_provisional_merit_list_of_neet-pg-2026.pdf",
+      "year": 2026,
+      "scope": "Assam"
+    },
+    {
+      "id": "arunachal-pradesh-0",
+      "title": "2026 TRIHMS state quota counselling seat advertisement",
+      "url": "https://dmetrap.in/wp-content/uploads/2026/10/Advertisement-PG-2026-1.pdf",
+      "year": 2026,
+      "scope": "Arunachal Pradesh"
+    },
+    {
+      "id": "manipur-0",
+      "title": "JNIMS PG prospectus 2025",
+      "url": "https://jnims.nic.in/wp-content/uploads/2025/12/pg-prospectus-25.pdf",
+      "year": 2025,
+      "scope": "Manipur"
+    },
+    {
+      "id": "meghalaya-0",
+      "title": "NEIGRIHMS MD/MS prospectus 2026–27",
+      "url": "https://www.neigrihms.gov.in/Latest News/academics/2026/PG/PG 2026-27/Prospectus PG MD MS 2026-2027.pdf",
+      "year": 2026,
+      "scope": "Meghalaya"
+    },
+    {
+      "id": "mizoram-0",
+      "title": "ZMC official PG admission notices",
+      "url": "https://zmc.edu.in/pages/pg-admission-news",
+      "year": 2026,
+      "scope": "Mizoram"
+    },
+    {
+      "id": "mizoram-1",
+      "title": "ZMC PG stipend and bond disclosure",
+      "url": "https://zmc.edu.in/pages/remunerationstipend-and-bonds",
+      "year": 2026,
+      "scope": "Mizoram"
+    },
+    {
+      "id": "mizoram-2",
+      "title": "ZMC permitted PG intake (not counselling availability)",
+      "url": "https://zmc.edu.in/pages/list-of-pg-courses-along-with-number-of-seats-permitted-by-nmc",
+      "year": 2026,
+      "scope": "Mizoram"
+    },
+    {
+      "id": "nagaland-0",
+      "title": "Nagaland government official department directory",
+      "url": "https://nagaland.gov.in/gov-websites",
+      "year": 2026,
+      "scope": "Nagaland"
+    },
+    {
+      "id": "sikkim-0",
+      "title": "SMIMS initial MD/MS seat matrix and fees 2025",
+      "url": "https://www.smu.edu.in/img/pdf/notice-board/MDMS-SEAT-MATRIX-FEE-STRUCTURE-2025.pdf",
+      "year": 2025,
+      "scope": "Sikkim"
+    },
+    {
+      "id": "sikkim-1",
+      "title": "SMIMS round-2 matrix and fees 2025",
+      "url": "https://www.smu.edu.in/img/pdf/notice-board/MDMS-SEAT-MATRIX-AND-FEE-STRUCTURE-ROUND-II-2025.pdf",
+      "year": 2025,
+      "scope": "Sikkim"
+    },
+    {
+      "id": "tripura-0",
+      "title": "Tripura postgraduate medical counselling bulletin 2025",
+      "url": "https://cdnbbsr.s3waas.gov.in/s337e3ca9768a106f686626a07db6facff/uploads/2025/11/202511071736707248.pdf",
+      "year": 2025,
+      "scope": "Tripura"
+    }
+  ]
+}

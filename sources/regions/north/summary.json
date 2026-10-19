@@ -1,0 +1,53 @@
+{
+  "himachalAllotments": {
+    "hp-r1": {
+      "sourceRows": 184,
+      "aggregatePools": 130,
+      "rankType": "State merit rank"
+    },
+    "hp-r2": {
+      "sourceRows": 79,
+      "aggregatePools": 57,
+      "rankType": "State merit rank"
+    },
+    "hp-r3": {
+      "sourceRows": 105,
+      "aggregatePools": 93,
+      "rankType": "State merit rank"
+    },
+    "hp-stray": {
+      "sourceRows": 24,
+      "aggregatePools": 23,
+      "rankType": "State merit rank"
+    },
+    "hp-stray2": {
+      "sourceRows": 5,
+      "aggregatePools": 5,
+      "rankType": "State merit rank"
+    }
+  },
+  "neigrihms2026InstitutionalSeats": 17,
+  "tripura2025Seats": {
+    "AGMC": 46,
+    "TMC": 8,
+    "LGBRIMH": 1,
+    "IGM Diploma": 10
+  },
+  "assam2025Round2": {
+    "publishedRows": 607,
+    "selected": 373,
+    "noChoice": 234,
+    "aggregatePools": 281,
+    "rankType": "State merit rank",
+    "resultStatus": "provisional"
+  },
+  "arunachal2026Seats": 13,
+  "smims2025InitialSeats": 26,
+  "institutions": 22,
+  "records": 691,
+  "financialPolicies": 26,
+  "jurisdictions": 17,
+  "allotmentObservations": 770,
+  "seatCount": 121,
+  "sourceIntegrity": "Candidate identifiers and names excluded. Himachal serial rows reconcile exactly within each published final list. State merit ranks are not NEET AIR. Historical and current matrices remain separate."
+}

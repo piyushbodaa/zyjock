@@ -1,0 +1,79 @@
+{
+  "states": 11,
+  "institutes": 170,
+  "records": 6143,
+  "financialEntries": 40,
+  "sourceCount": 20,
+  "coverage": "Partial, explicitly dated official-source coverage; not all states or all institutions complete.",
+  "stateRecords": {
+    "Gujarat": 2687,
+    "Madhya Pradesh": 603,
+    "Bihar": 485,
+    "Maharashtra": 1751,
+    "Goa": 49,
+    "Jharkhand": 79,
+    "Chhattisgarh": 489
+  },
+  "acquisitionReconciliation": {
+    "gujaratClosure": {
+      "sourceProgramQuotaRows": 1395,
+      "rankBasis": "NEET AIR columns; general/category state merit columns not substituted",
+      "blankRanks": "Omitted; no inferred conversion"
+    },
+    "gujaratSeats": {
+      "sourceProgramRows": 1209,
+      "stateQuotaSeats": 2703,
+      "excluded": "AIQ columns already represented through MCC; zero pools excluded"
+    },
+    "mpRound2": {
+      "publishedPools": 603,
+      "allotments": 766,
+      "rankBasis": "Explicit NEET PG All India Rank; state merit stored separately"
+    },
+    "biharRound1": {
+      "publishedPools": 485,
+      "rankBasis": "NEET opening/closing rank, not UR/category state merit ranks"
+    },
+    "maharashtraRound1": {
+      "selectedRows": 2086,
+      "notAllocatedRows": 3467,
+      "sourceRows": 5553,
+      "sourceLastSerial": 5553,
+      "uniqueSourceSerials": 5553,
+      "aggregatePools": 1751,
+      "rankBasis": "State merit list (SML); never AIR"
+    },
+    "goa2026": {
+      "publishedSeats": 72,
+      "extractedSeats": 72,
+      "sourceCourses": 22
+    },
+    "jh-allotment-r2": {
+      "allotments": 62,
+      "pools": 52,
+      "rankBasis": "Round-specific CML State merit rank"
+    },
+    "jh-allotment-r3": {
+      "allotments": 33,
+      "pools": 25,
+      "rankBasis": "Round-specific CML State merit rank"
+    },
+    "jh-allotment-stray": {
+      "allotments": 2,
+      "pools": 2,
+      "rankBasis": "Round-specific CML State merit rank"
+    },
+    "cgCombinedRound12": {
+      "allotmentRows": 262,
+      "sourceLastSerial": 262,
+      "uniqueSerials": 262,
+      "aggregatePools": 247,
+      "supersedes": "Earlier 2025 Round 1 and Round 2 process cancelled by 22 January 2026 authority notice"
+    },
+    "cgMopup": {
+      "publishedPools": 242,
+      "historicalClearVacancies": 245
+    },
+    "gujaratFeeCaution": "Authority table headed TUTION FEE includes ₹130800 at BJMC where institute notice separates ₹30000 fee + ₹100800 refundable caution. Not imported as annual tuition without resolving basis."
+  }
+}

@@ -1,6 +1,8 @@
 # Zyjock · NEET PG
 
-A free, independent website for planning **NEET PG counselling**. Every implemented tool is available without payment or an account. Zyjock uses its own interface and branding and is not affiliated with Zynerd, MCC, NMC or NBEMS. No private Zynerd API or database is used.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+A free, open-source, independent website for planning **NEET PG counselling**. Every implemented tool is available without payment or an account. Zyjock uses its own interface and branding and is not affiliated with Zynerd, MCC, NMC or NBEMS. No private Zynerd API or database is used.
 
 ## Run locally
 
@@ -14,8 +16,20 @@ Open <http://127.0.0.1:4173>. Python 3 is required; there are no npm dependencie
 
 Deploy the complete `dist/` directory. Its `data.json` manifest loads active inventory and historical observations from `pg-records-*.json`; zero-seat pools load from `pg-zero-*.json` only when requested. Keep the manifest and both sets of chunks together.
 
+## Vercel deployment
+
+Production: <https://zyjock.vercel.app>. Vercel project `zyjock` is linked locally; `vercel.json` serves `dist/` without a build or install step. `.vercelignore` uploads the static bundle and deployment configuration only. Local credentials and acquisition intermediates are excluded.
+
+```bash
+npx --yes vercel@64.3.1 deploy --prod --scope piyushbodaa --yes
+```
+
+Browser workspaces are specific to each hostname. Use the workspace backup and restore controls to move saved choices from the earlier ChatGPT Site to the Vercel site.
+
 ## Included tools
 
+- A historical rank scan that counts the distinct seat pools whose latest bundled closing AIR reached a given rank, with a score-vs-qualifying-threshold checker (no marks-to-rank conversion is claimed).
+- An eligibility document self-check, an institute directory with per-institute profiles, an official course-code directory, and a seat-capacity view that keeps pools without matched history explicitly unknown.
 - A personal PG plan with AIR, allotted seat category, specialty, state and tuition preferences.
 - College and hospital search, a specialty explorer, and filters for programme, quota, category, source year and round.
 - The published 2026 MCC seat matrices beside separately dated, conservatively matched 2025 historical ranks.
@@ -66,3 +80,7 @@ Source PDFs, extracted text, raw extraction caches and review images remain loca
 The PG plan, lists, imported records, checklist, reminders and read markers are saved in this browser's `localStorage` under `zyjock.pg.workspace.v2`. They do not synchronize across browsers, devices or origins. Clearing browser storage removes them; download a workspace backup to keep a copy. Imports are parsed locally and are not sent to a server.
 
 Zyjock is static HTML, CSS and JavaScript. There is no backend account service, payment integration or automatic official-data refresh. External source links open the publishing authority's website. Keep the source dates, unknown values and coverage labels when extending the data.
+
+## License
+
+Code is released under the [MIT License](LICENSE). The compiled datasets are factual extracts from official publications and are **not** covered by that grant — see [NOTICE.md](NOTICE.md) for the code/data split. Contributions welcome: see [CONTRIBUTING.md](CONTRIBUTING.md).

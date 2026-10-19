@@ -41,6 +41,8 @@ def specialty(course):
         if needle in c:return label
     return re.sub(r'^\(?NBEMS(?:-DIPLOMA)?\)?\s*|^M\.[DS]\.\s*','',course,flags=re.I).strip(' ()').title()
 seats=read('pg-seats.json');history=read('pg-history.json');content=read('pg-content.json')
+glossary_path=ROOT/'sources'/'pg-course-glossary.json'
+glossary=json.loads(glossary_path.read_text()) if glossary_path.exists() else []
 (ROOT/'sources'/'pg-content.json').write_text(json.dumps(content,ensure_ascii=False,indent=2))
 insts={i['id']:dict(i) for i in seats['institutes']}
 match_artifact=json.loads((ROOT/'sources'/'pg-institution-matches.json').read_text())
@@ -134,7 +136,7 @@ for i in insts.values():
 published=sum(r.get('seats') or 0 for r in current)
 coverage={'label':'NEET PG official data','publishedSeats':published,'currentInstitutes':len(seats['institutes']),'currentRecords':len(current),'historicalRecords':len(historic),'historicalAllotments':sum(r['allotmentCount'] for r in historic),'historicalScope':'2025 · Rounds 1, 2, 3 and Stray Vacancy','matchedCurrentPools':matched,'financialPools':financial_matches,'summary':f'MCC 2026 Round 1 published matrices contain {published:,} seats. The historical explorer contains {len(historic):,} cutoff observations derived from MCC 2025 final allotment results. {matched:,} current seat pools have an exact historical match.','limitations':['MCC counselling only. State counselling outside these MCC sources is not included in the seat and cutoff dataset.','The 2026 matrices are a dated publication snapshot and can be revised; they are not a live vacancy feed.','Historical cutoffs aggregate current-round allotments by allotted seat category. Held seats without a new allocation are excluded from later-round observations.','Cross-year institution matching uses exact full addresses or unique exact names within the same explicit state. Generic names, ambiguous identities and conflicting postcodes are excluded from name matching. Course code, quota and allotted category must also match. Unmatched rows are not labelled new seats.','Financial source coverage is limited and separately dated. Missing fees, stipends or bond terms remain unknown.','No fictional colleges, demo ranks or other exams are included. Personal candidate identifiers are excluded.']}
 defaults={k:None for k in ['openingRank','closingRank','seats','annualFee','monthlyStipend','bondYears','bondPenalty','previousSeats','historicalOpeningRank','historicalClosingRank','historicalYear','historicalRound','financialYear']};defaults.update(exam='NEET PG',dataStatus='verified',counselling='MCC')
-output={'version':2,'updatedAt':'2026-10-19','exams':['NEET PG'],'coverage':coverage,'institutes':public_insts,'records':[],'recordFiles':files,'zeroRecordFiles':zero_files,'recordDefaults':defaults,'sourceIndex':source_index,'sources':all_sources,'resources':content.get('resources',[]),'guides':content.get('guides',[]),'notices':content.get('notices',[]),'timeline':content.get('timeline',[]),'financials':financials,'dnbAnnualFeeReference':content.get('dnbAnnualFeeReference')}
+output={'version':2,'updatedAt':'2026-10-19','exams':['NEET PG'],'coverage':coverage,'institutes':public_insts,'records':[],'recordFiles':files,'zeroRecordFiles':zero_files,'recordDefaults':defaults,'sourceIndex':source_index,'sources':all_sources,'resources':content.get('resources',[]),'guides':content.get('guides',[]),'notices':content.get('notices',[]),'timeline':content.get('timeline',[]),'financials':financials,'dnbAnnualFeeReference':content.get('dnbAnnualFeeReference'),'scoreScale':content.get('scoreScale'),'courseGlossary':glossary}
 (DIST/'data.json').write_text(json.dumps(output,ensure_ascii=False,separators=(',',':')))
 summary={**coverage,'institutionMatches':len([k for k,v in remap.items() if k!=v]),'ambiguousInstitutionKeys':ambiguous,'compiledPools':len(all_rows),'files':[{ 'name':f,'bytes':(DIST/f).stat().st_size} for f in ['data.json']+files+zero_files],'matchingMethod':'Exact full institution/address or unique exact institution name and explicit state, with generic names, ambiguity and postcode conflicts excluded; exact course code, quota and allotted category. See pg-institution-matches.json. No fuzzy matching.'}
 (ROOT/'sources'/'pg-site-summary.json').write_text(json.dumps(summary,indent=2))
@@ -142,3 +144,5 @@ for name in ['pg-history.json','pg-seats.json','pg-content.json']:
     p=DIST/name
     if p.exists():p.replace(DERIVED/name)
 print(json.dumps(summary,indent=2))
+from build_expansion import compile_expansion
+compile_expansion(ROOT,DIST,program,specialty)

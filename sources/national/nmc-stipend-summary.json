@@ -1,0 +1,39 @@
+{
+  "sourceRows": 804,
+  "sourceRecordNumbers": 804,
+  "collegePgDisclosures": 162,
+  "numericPgDisclosures": 119,
+  "unknownPgAmountDisclosures": 43,
+  "institutionsWithUnknownReceiptYear": 12,
+  "stateCount": 22,
+  "yearCounts": {
+    "2025": 8,
+    "2024": 142,
+    "None": 12
+  },
+  "stateCounts": {
+    "Odisha": 3,
+    "Karnataka": 22,
+    "Tamil Nadu": 19,
+    "Jammu & Kashmir": 1,
+    "Madhya Pradesh": 4,
+    "Rajasthan": 4,
+    "Telangana": 9,
+    "Uttar Pradesh": 27,
+    "West Bengal": 8,
+    "Maharashtra": 22,
+    "Andhra Pradesh": 10,
+    "Gujarat": 4,
+    "Haryana": 5,
+    "Kerala": 10,
+    "Puducherry": 3,
+    "Punjab": 3,
+    "Uttarakhand": 2,
+    "Bihar": 2,
+    "Delhi": 1,
+    "Sikkim": 1,
+    "Tripura": 1,
+    "Meghalaya": 1
+  },
+  "basis": "Only explicit PG wording in Stipend of College column; no UG/SS substitution and no state benchmark substitution. Unknown receipt year remains null. Multiple dated disclosures may reference the same college."
+}

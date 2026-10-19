@@ -9,7 +9,7 @@
  */
 
 const NUMERIC_FIELDS = ['year', 'openingRank', 'closingRank', 'seats', 'annualFee', 'monthlyStipend', 'bondYears', 'bondPenalty', 'previousSeats'];
-const DEFAULT_COLUMNS = ['id', 'instituteId', 'instituteName', 'exam', 'course', 'counselling', 'quota', 'category', 'year', 'round', 'openingRank', 'closingRank', 'seats', 'annualFee', 'monthlyStipend', 'bondYears', 'bondPenalty', 'previousSeats', 'dataStatus', 'sourceUrl', 'sourceLabel'];
+const DEFAULT_COLUMNS = ['id', 'instituteId', 'instituteName', 'exam', 'course', 'counselling', 'quota', 'category', 'year', 'round', 'rankType', 'openingRank', 'closingRank', 'seats', 'annualFee', 'monthlyStipend', 'bondYears', 'bondPenalty', 'previousSeats', 'dataStatus', 'sourceUrl', 'sourceLabel'];
 const EMPTY = new Set(['', '-', '—', 'na', 'n/a', 'null', 'unknown', 'not available']);
 const text = value => value == null ? '' : String(value).trim();
 const lower = value => text(value).toLowerCase();
@@ -82,9 +82,10 @@ export function filterRecords(records = [], filters = {}, institutes = []) {
     if (!matches(institute.state || record.state, filters.state)) return false;
     if (!matches(institute.city || record.city, filters.city)) return false;
     if (!matches(institute.type || record.type, filters.type)) return false;
-    for (const field of ['course', 'specialty', 'program', 'counselling', 'quota', 'category', 'year', 'round']) if (!matches(record[field], filters[field])) return false;
+    for (const field of ['course', 'specialty', 'program', 'counselling', 'quota', 'category', 'year', 'round', 'rankType']) if (!matches(record[field], filters[field])) return false;
     if (!unrestricted(filters.dataMode) && lower(record.dataStatus) !== lower(filters.dataMode)) return false;
     if (rank != null && rank > 0) {
+      if ((record.rankType || 'Not specified') !== (filters.rankType || 'NEET PG AIR')) return false;
       const cutoff = numberOrNull(record.recordKind==='seat-matrix'?record.historicalClosingRank:record.closingRank);
       if (cutoff == null ? !includeUnknown : cutoff < rank) return false;
     }
@@ -350,4 +351,156 @@ export function summarizeData(data = {}) {
     withSeats: records.filter(record => numberOrNull(record.seats) != null).length,
     verifiedWithCutoffs: records.filter(record => record.dataStatus === 'verified' && numberOrNull(record.closingRank) != null).length,
   };
+}
+
+/* ------------------------------------------------------------------ */
+/* NEET PG planning helpers. Every result is a historical comparison:  */
+/* nothing here predicts an allotment or decides eligibility.          */
+/* ------------------------------------------------------------------ */
+
+const ROUND_ORDER = { 'round 1': 1, 'round 2': 2, 'round 3': 3, 'round 4': 4, 'stray vacancy': 5, 'mop up': 6, 'mop-up': 6 };
+const roundRank = round => ROUND_ORDER[lower(round)] ?? 0;
+const poolKeyOf = record => [record.instituteId, record.courseCode || record.course, record.quota, record.category].map(v => lower(v)).join('|');
+const closingOf = record => numberOrNull(record.recordKind === 'seat-matrix' ? record.historicalClosingRank : record.closingRank);
+
+/** Display band only: how a past closing rank compares with a candidate rank. */
+export function rankBand(closingRank, rank) {
+  const closing = numberOrNull(closingRank), value = numberOrNull(rank);
+  if (closing == null || value == null || value <= 0) return null;
+  if (closing >= value) return 'reached';
+  if (closing >= value * 0.9) return 'near';
+  return 'beyond';
+}
+
+/**
+ * Count and list distinct seat pools whose latest historical observation
+ * closed at or beyond the supplied rank. One pool = institute + course +
+ * quota + allotted seat category. Filters match exactly (blank = all).
+ */
+export function rankScan(records = [], options = {}, institutes = []) {
+  const rank = numberOrNull(options.rank);
+  if (rank == null || rank <= 0) return { available: false, reason: 'Enter your NEET PG All India rank from your official scorecard.', pools: [], totalPools: 0, reachedCount: 0, nearCount: 0, beyondCount: 0, bySpecialty: [] };
+  const map = instituteMap(institutes);
+  const wanted = (value, selected) => unrestricted(selected) || lower(value) === lower(selected);
+  const groups = new Map();
+  for (const record of records) {
+    if (record.recordKind !== 'cutoff' && closingOf(record) == null) continue;
+    const closing = closingOf(record);
+    if (closing == null) continue;
+    const inst = institution(record, map);
+    if (!wanted(record.category, options.category) || !wanted(record.quota, options.quota)
+      || !wanted(record.specialty, options.specialty) || !wanted(record.program, options.program)
+      || !wanted(inst.state || record.state, options.state)
+      || !wanted(record.year, options.year)) continue;
+    const key = poolKeyOf(record);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(record);
+  }
+  const pools = [...groups.values()].map(history => {
+    const sorted = [...history].sort((a, b) => compareNumber(a.year, b.year) || roundRank(a.round) - roundRank(b.round));
+    const latest = sorted.at(-1);
+    return { record: latest, closingRank: closingOf(latest), band: rankBand(closingOf(latest), rank), history: sorted };
+  }).sort((a, b) => compareNumber(a.closingRank, b.closingRank));
+  const reached = pools.filter(p => p.band === 'reached');
+  const specialtyCounts = new Map();
+  for (const p of reached) specialtyCounts.set(p.record.specialty || p.record.course, (specialtyCounts.get(p.record.specialty || p.record.course) || 0) + 1);
+  return {
+    available: true, rank, pools,
+    totalPools: pools.length,
+    reachedCount: reached.length,
+    nearCount: pools.filter(p => p.band === 'near').length,
+    beyondCount: pools.filter(p => p.band === 'beyond').length,
+    reachedInstitutes: new Set(reached.map(p => p.record.instituteId)).size,
+    bySpecialty: [...specialtyCounts].map(([specialty, count]) => ({ specialty, count })).sort((a, b) => b.count - a.count),
+    note: 'Counts distinct institute/course/quota/category pools using each pool\'s latest bundled observation. A past closing rank does not establish current eligibility or a future allotment.',
+  };
+}
+
+/** Compare a score with published NEET PG qualifying thresholds. Not a rank estimate. */
+export function qualifyingStatus(score, scoreScale = {}) {
+  const value = numberOrNull(score);
+  const thresholds = Array.isArray(scoreScale?.qualifyingThresholds) ? scoreScale.qualifyingThresholds : [];
+  if (value == null || !thresholds.length) return { available: false, reason: 'Enter your official NEET PG score to compare it with the published qualifying thresholds.', results: [] };
+  if (scoreScale.maximum != null && (value < 0 || value > Number(scoreScale.maximum))) return { available: false, reason: `Score must be between 0 and ${scoreScale.maximum}.`, results: [] };
+  return {
+    available: true, score: value, maximum: scoreScale.maximum ?? null, sourceUrl: scoreScale.sourceUrl || '',
+    results: thresholds.map(t => ({ category: t.category, percentile: t.percentile ?? null, threshold: numberOrNull(t.score), meets: value >= numberOrNull(t.score) })),
+    note: scoreScale.note || 'Qualifying thresholds only. They are not college admission cut-offs and do not convert marks to a rank.',
+  };
+}
+
+/** Document self-check from published bulletin requirements. Never decides seat eligibility. */
+export function eligibilityChecks(answers = {}, scoreScale = {}) {
+  const checks = [];
+  const q = qualifyingStatus(answers.score, scoreScale);
+  const chosen = q.results.find(r => lower(r.category) === lower(answers.thresholdCategory));
+  if (!q.available) checks.push({ id: 'qualification', label: 'NEET PG qualification', status: 'verify', detail: 'Enter your official score and select the threshold row that applies to you, then confirm qualification on your NBEMS scorecard.' });
+  else if (!chosen) checks.push({ id: 'qualification', label: 'NEET PG qualification', status: 'verify', detail: 'Select the published threshold row that applies to you. Thresholds can be revised by notice; re-check before registration.' });
+  else checks.push({ id: 'qualification', label: 'NEET PG qualification', status: chosen.meets ? 'met' : 'not-met', detail: chosen.meets ? `Your score meets the published ${chosen.category} threshold of ${chosen.threshold}. Keep the official scorecard ready; a revised notice can change thresholds.` : `Your score is below the published ${chosen.category} threshold of ${chosen.threshold}. Watch for any official percentile-reduction notice before assuming the position is final.` });
+  const tri = (id, label, value, metDetail) => checks.push({ id, label, status: value === 'yes' ? 'met' : value === 'no' ? 'not-met' : 'verify', detail: value === 'yes' ? metDetail : value === 'no' ? 'This is listed as a requirement in the counselling bulletin material bundled with Zyjock. Resolve it before choice filling and confirm the exact rule in the current bulletin.' : 'Not answered. Confirm this against the current bulletin before you rely on any seat pool.' });
+  tri('internship', 'Internship completion by the published cut-off', answers.internshipByCutoff, 'Keep your internship completion certificate ready for document verification.');
+  tri('registration', 'MBBS qualification and medical registration', answers.registered, 'Keep your MBBS degree/provisional certificate and registration certificate ready.');
+  checks.push({ id: 'pool-conditions', label: 'Seat-pool conditions (quota, category, domicile, institutional, minority, NRI)', status: 'verify', detail: 'Conditions differ by quota, category and authority, and Zyjock cannot decide them for an individual pool. Check every pool you save against the current MCC or state bulletin.' });
+  return checks;
+}
+
+/** Aggregate every bundled record for one institute. */
+export function instituteSummary(records = [], instituteId) {
+  const mine = records.filter(r => String(r.instituteId) === String(instituteId));
+  const seatRows = mine.filter(r => r.recordKind === 'seat-matrix');
+  const cutoffRows = mine.filter(r => r.recordKind === 'cutoff');
+  const uniq = values => [...new Set(values.filter(present))].sort((a, b) => collator.compare(text(a), text(b)));
+  const closings = cutoffRows.map(r => numberOrNull(r.closingRank)).filter(v => v != null);
+  return {
+    instituteId, records: mine, seatRows, cutoffRows,
+    seatPools: seatRows.length, cutoffPools: new Set(cutoffRows.map(poolKeyOf)).size,
+    totalSeats: seatRows.reduce((sum, r) => sum + (numberOrNull(r.seats) || 0), 0),
+    specialties: uniq(mine.map(r => r.specialty)), programs: uniq(mine.map(r => r.program)),
+    quotas: uniq(mine.map(r => r.quota)), categories: uniq(mine.map(r => r.category)),
+    mostCompetitiveClosing: closings.length ? Math.min(...closings) : null,
+    feesKnown: mine.filter(r => numberOrNull(r.annualFee) != null).length,
+  };
+}
+
+/**
+ * Current published capacity beside matched history. Seats and past
+ * allotments are different quantities, so no like-for-like delta is claimed;
+ * a seat delta appears only when a previousSeats value was supplied.
+ */
+export function capacityRows(records = []) {
+  const seats = records.filter(r => r.recordKind === 'seat-matrix');
+  const withHistory = [], withoutHistory = [];
+  const bySpecialty = new Map();
+  for (const r of seats) {
+    const entry = {
+      record: r, seats: numberOrNull(r.seats),
+      hasHistory: r.historicalClosingRank != null || (Array.isArray(r.historyIds) && r.historyIds.length > 0),
+      historicalClosingRank: numberOrNull(r.historicalClosingRank),
+      seatDelta: numberOrNull(r.seats) != null && numberOrNull(r.previousSeats) != null ? numberOrNull(r.seats) - numberOrNull(r.previousSeats) : null,
+    };
+    (entry.hasHistory ? withHistory : withoutHistory).push(entry);
+    const key = r.specialty || r.course || 'Unclassified';
+    if (!bySpecialty.has(key)) bySpecialty.set(key, { specialty: key, seats: 0, pools: 0, withHistory: 0 });
+    const agg = bySpecialty.get(key);
+    agg.seats += entry.seats || 0; agg.pools += 1; if (entry.hasHistory) agg.withHistory += 1;
+  }
+  return {
+    withHistory, withoutHistory,
+    totalSeats: seats.reduce((sum, r) => sum + (numberOrNull(r.seats) || 0), 0),
+    bySpecialty: [...bySpecialty.values()].sort((a, b) => b.seats - a.seats),
+  };
+}
+
+/** Factual checks over an ordered choice list. No chance or quality scores. */
+export function listCheck(items = []) {
+  const warnings = [];
+  const seen = new Map();
+  for (const r of items) {
+    const key = poolKeyOf(r);
+    if (seen.has(key)) warnings.push({ type: 'duplicate-pool', ids: [seen.get(key), r.id], message: 'The same institute, course, quota and category appears more than once. A counselling portal normally accepts each choice once.' });
+    else seen.set(key, r.id);
+    if (numberOrNull(r.seats) === 0) warnings.push({ type: 'zero-seats', ids: [r.id], message: 'A saved entry has zero published seats in its snapshot.' });
+    if (closingOf(r) == null) warnings.push({ type: 'no-cutoff', ids: [r.id], message: 'A saved entry has no bundled historical closing rank. Treat its competitiveness as unknown, not easy.' });
+  }
+  return warnings;
 }

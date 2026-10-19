@@ -1,4 +1,5 @@
 node_modules/
+.vercel/
 .DS_Store
 *.tar.gz
 *.tgz
@@ -6,6 +7,9 @@ node_modules/
 
 # Local acquisition evidence: keep scripts and aggregate metadata in Git.
 sources/**/*.pdf
+sources/**/*.html
+sources/**/*.csv
+sources/**/raw/
 sources/**/*.txt
 sources/**/*.png
 sources/**/*.jpg
@@ -20,3 +24,7 @@ sources/derived/
 sources/*-cache.json
 sources/*-cells.json
 !sources/pg-content-provenance.txt
+.vercel
+.env*
+.openai/
+sources/latest-build.log
