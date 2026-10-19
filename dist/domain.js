@@ -82,10 +82,10 @@ export function filterRecords(records = [], filters = {}, institutes = []) {
     if (!matches(institute.state || record.state, filters.state)) return false;
     if (!matches(institute.city || record.city, filters.city)) return false;
     if (!matches(institute.type || record.type, filters.type)) return false;
-    for (const field of ['course', 'counselling', 'quota', 'category', 'year', 'round']) if (!matches(record[field], filters[field])) return false;
+    for (const field of ['course', 'specialty', 'program', 'counselling', 'quota', 'category', 'year', 'round']) if (!matches(record[field], filters[field])) return false;
     if (!unrestricted(filters.dataMode) && lower(record.dataStatus) !== lower(filters.dataMode)) return false;
     if (rank != null && rank > 0) {
-      const cutoff = numberOrNull(record.closingRank);
+      const cutoff = numberOrNull(record.recordKind==='seat-matrix'?record.historicalClosingRank:record.closingRank);
       if (cutoff == null ? !includeUnknown : cutoff < rank) return false;
     }
     if (minimumFee != null || maximumFee != null) {
@@ -123,6 +123,7 @@ function sorter(sort, map) {
   const direction = descending ? -1 : 1;
   return (a, b) => {
     const ia = institution(a, map), ib = institution(b, map);
+    if (field === 'closingRank') return compareNumber(a.recordKind==='seat-matrix'?a.historicalClosingRank:a.closingRank,b.recordKind==='seat-matrix'?b.historicalClosingRank:b.closingRank,direction);
     if (NUMERIC_FIELDS.includes(field)) return compareNumber(a[field], b[field], direction);
     if (field === 'seatDelta') return compareNumber(compareMetrics(a).seatDelta, compareMetrics(b).seatDelta, direction);
     const first = ['name', 'city', 'state', 'type'].includes(field) ? ia[field] : a[field];
@@ -291,7 +292,7 @@ export function validateImport(rows = []) {
     const rowErrors = [];
     const fail = (field, message) => rowErrors.push({ row: rowNumber, field, message });
     if (!present(input.instituteId) && !present(input.instituteName)) fail('instituteId', 'Provide an instituteId or instituteName.');
-    if (!['NEET UG', 'NEET PG', 'NEET MDS', 'INICET', 'NEET SS', 'DNB PDCET'].includes(canonicalExam(input.exam))) fail('exam', 'Use NEET UG, NEET PG, NEET MDS, INICET, NEET SS, or DNB PDCET.');
+    if (canonicalExam(input.exam) !== 'NEET PG') fail('exam', 'This workspace accepts NEET PG records only.');
     if (!present(input.course)) fail('course', 'Provide a course.');
     for (const field of NUMERIC_FIELDS) {
       const value = numberOrNull(input[field]);

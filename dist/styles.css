@@ -1080,3 +1080,13 @@ details p, details ul { font-size: 12px; }
   .sticky-side { position: static; }
   a.source-link::after { content: " (" attr(href) ")"; font-size: 8px; word-break: break-all; }
 }
+
+/* NEET PG focused workspace */
+.pg-exam{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:14px;min-width:180px}
+.pg-exam .badge{font-size:10px}.source-register{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.source-register article{padding:15px;border:1px solid var(--border);border-radius:10px}.source-register h3{font-size:15px;line-height:1.5}.source-register p{font-size:13px;color:var(--muted)}
+.specialty-card{background:white;border:1px solid var(--border);padding:23px;border-radius:14px;display:flex;flex-direction:column;gap:13px}.specialty-card h2{font-size:18px;line-height:1.4;margin:0}.specialty-numbers{display:flex;gap:30px}.specialty-numbers div{display:flex;flex-direction:column}.specialty-numbers strong{font-size:26px;letter-spacing:-1px}.specialty-numbers span{font-size:12px;color:var(--muted)}.specialty-card .btn{margin-top:auto;align-self:flex-start}
+.timeline-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;padding:0 20px 10px}.timeline-event{padding:20px;border-left:2px solid #dce8bb;border-bottom:1px solid var(--border);margin-bottom:15px}.timeline-date{font-size:12px;color:#557052;font-weight:700}.timeline-event h3{font-size:15px;margin:8px 0}.timeline-event p{font-size:13px;color:var(--muted);line-height:1.6}.timeline-event .source-link{font-size:11px}.timeline-event .btn{font-size:11px;min-height:28px}.match-note{font-size:12px;line-height:1.6;padding:12px;background:#f1f5e8;border-radius:8px}
+@media(min-width:861px) and (max-height:850px){.nav-item{min-height:33px;padding-top:6px;padding-bottom:6px}.nav-label{margin-top:11px;margin-bottom:6px}.sidebar-bottom .free-card{padding:10px}.brand{margin-bottom:12px}}
+@media(max-width:1000px){.timeline-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pg-exam{min-width:0}.pg-exam .badge{display:none}}
+@media(max-width:600px){.timeline-grid,.source-register{grid-template-columns:minmax(0,1fr)}.timeline-event{padding:16px}.pg-exam{font-size:12px;gap:6px}.pg-exam>svg{display:none}.topbar-right .avatar{display:none}.data-select select{max-width:138px;font-size:11px}.main-content .filters>.toolbar{flex-wrap:wrap}.specialty-card{padding:20px}}
+@media print{#builder-form,.sticky-side,.free-banner,#profile-form{display:none!important}.two-column:has(.choice-list){display:block}.choice-list .list-item{break-inside:avoid}.choice-list .college-name{font-size:12px}.choice-list{display:block}}

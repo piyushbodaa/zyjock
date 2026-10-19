@@ -1,0 +1,147 @@
+{
+  "exam": "NEET PG",
+  "year": 2025,
+  "rounds": [
+    "Round 1",
+    "Round 2",
+    "Round 3",
+    "Stray Vacancy"
+  ],
+  "institutes": 1888,
+  "records": 42921,
+  "allotments": 69147,
+  "scope": "MCC NEET PG 2025 final Round 1, Round 2, Round 3 and Stray Vacancy result documents; current-round allotment columns only.",
+  "method": "Opening and closing rank are the minimum and maximum AIR by institution, course, quota and allotted seat category. Earlier-round held seats with no new allocation are excluded from later-round aggregates.",
+  "limitations": [
+    "Historical allotments are not joined admissions, current vacancies or admission guarantees.",
+    "State counselling outside these MCC result documents is not covered.",
+    "Allotment counts are not seat-matrix capacity; seats remains null.",
+    "Historical fees, stipend and service-bond data are not present in these result PDFs.",
+    "Institutions are matched across years only by exact normalized source institution/address cell; unmatched identities remain separate.",
+    "No candidate-level identifiers or records are published."
+  ],
+  "omittedRows": 0,
+  "sources": [
+    {
+      "id": "pg2025-r1",
+      "round": "Round 1",
+      "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/11/202511221303622410.pdf",
+      "pages": 1301,
+      "candidateRows": 26889,
+      "allotments": 26889,
+      "pools": 14591,
+      "omittedRows": 0,
+      "omissionReasons": {},
+      "nonAllocationRows": 0,
+      "nonAllocationReasons": {},
+      "sha256": "6a0706462f17d13ac7a521d2bd8a654f88780b09affa49e609d28f7d241a3c85",
+      "allocationRemarks": {
+        "Allotted": 26423,
+        "Allotted( NRI Priority : 2 )": 337,
+        "Allotted( NRI Priority : 1 )": 129
+      },
+      "duplicateRankRows": 0,
+      "serialReconciliation": {
+        "min": 1,
+        "max": 26889,
+        "count": 26889,
+        "contiguous": true
+      }
+    },
+    {
+      "id": "pg2025-r2",
+      "round": "Round 2",
+      "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/12/202512172132273940.pdf",
+      "pages": 2844,
+      "candidateRows": 35023,
+      "allotments": 20787,
+      "pools": 13108,
+      "omittedRows": 0,
+      "omissionReasons": {},
+      "nonAllocationRows": 14236,
+      "nonAllocationReasons": {
+        "Did not opt for Upgradation.": 1871,
+        "Did not fill up fresh choices.": 2153,
+        "No Upgradation": 5358,
+        "Not Allotted.": 4854
+      },
+      "sha256": "094aa8c7343dbce3bcccf8864d516f39eac297a782f64d8231af77cb44d2c7b8",
+      "allocationRemarks": {
+        "Fresh Allotted in 2nd Round": 14874,
+        "Upgraded": 5516,
+        "Fresh Allotted in 2nd Round( AFMS ranking )": 177,
+        "Upgraded( AFMS ranking )": 14,
+        "Upgraded( NRI Priority : 1 )": 7,
+        "Fresh Allotted in 2nd Round( NRI Priority : 1 )": 26,
+        "Fresh Allotted in 2nd Round( NRI Priority : 2 )": 158,
+        "Upgraded( NRI Priority : 2 )": 15
+      },
+      "duplicateRankRows": 0
+    },
+    {
+      "id": "pg2025-r3",
+      "round": "Round 3",
+      "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+      "pages": 1555,
+      "candidateRows": 41694,
+      "allotments": 18673,
+      "pools": 12639,
+      "omittedRows": 0,
+      "omissionReasons": {},
+      "nonAllocationRows": 23021,
+      "nonAllocationReasons": {
+        "Did not opt for Upgradation.": 3450,
+        "Did not fill up fresh choices.": 7899,
+        "No Upgradation": 7094,
+        "Not Allotted.": 4578
+      },
+      "sha256": "ce17a796fb30e03ffc6a6a3fe5f96bc96e8ef8a8df8c6e96f89797e0ded8ebdd",
+      "allocationRemarks": {
+        "Fresh Allotted in 3nd Round": 9476,
+        "Upgraded": 8544,
+        "Fresh Allotted in 3nd Round( AFMS ranking )": 107,
+        "Upgraded( AFMS ranking )": 13,
+        "Upgraded( NRI Priority : 1 )": 7,
+        "Fresh Allotted in 3nd Round( NRI Priority : 2 )": 388,
+        "Upgraded( NRI Priority : 2 )": 25,
+        "Fresh Allotted in 3nd Round( NRI Priority : 1 )": 113
+      },
+      "duplicateRankRows": 0
+    },
+    {
+      "id": "pg2025-stray",
+      "round": "Stray Vacancy",
+      "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260223177387794.pdf",
+      "pages": 130,
+      "candidateRows": 2798,
+      "allotments": 2798,
+      "pools": 2583,
+      "omittedRows": 0,
+      "omissionReasons": {},
+      "nonAllocationRows": 0,
+      "nonAllocationReasons": {},
+      "sha256": "7e5f3cc95394b7550313d4c624f3436728621fe57b5cc1b4ab261d472abb9a27",
+      "allocationRemarks": {
+        "Allotted": 2707,
+        "Allotted( AFMS ranking )": 18,
+        "Allotted( NRI Priority : 2 )": 59,
+        "Allotted( NRI Priority : 1 )": 14
+      },
+      "duplicateRankRows": 0,
+      "serialReconciliation": {
+        "min": 1,
+        "max": 2798,
+        "count": 2798,
+        "contiguous": true
+      }
+    }
+  ],
+  "courseCodeMatchedRecords": 42921,
+  "institutionCodeMatchedIdentities": 0,
+  "courseCodesDerivedFrom": {
+    "url": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "pages": "1–3",
+    "method": "Exact normalized course-title match to MCC program glossary; originalCourse retained."
+  },
+  "rankColumn": "Rank column in MCC result. Separate internal AFMS merit ranks appearing in remarks are not collected."
+}

@@ -1,46 +1,121 @@
-ZYJOCK DATA ACQUISITION AND COVERAGE
-Acquired: 2026-10-19
-Public website data file: dist/data.json
-Reproduction: python sources/build_data.py (run from zyjock/)
+ZYJOCK NEET PG: DATA ACQUISITION AND PUBLICATION
+Checked: 2026-10-19
+Public dataset: dist/data.json manifest, active dist/pg-records-*.json chunks and lazily loaded dist/pg-zero-*.json chunks
+Scope: NEET PG only. No demo colleges, fictional admission figures or other exams.
 
-VERIFIED HISTORICAL SCOPE
-20 institutions listed in MCC's one-page FINAL SEAT MATRIX FOR AIIMS/BHU/JIMPER ROUND 1 UG 2025 (MBBS & BDS). Only MBBS, NEET UG, MCC, Open Seat Quota, 2025, Round 1 are bundled as verified. This is not an exhaustive national, all-quota, all-round or all-exam dataset.
+1. CURRENT PUBLISHED INVENTORY: MCC 2026 ROUND 1
 
-PRIMARY SOURCES
-1. MCC archive page, which links all three PDFs below:
-   https://mcc.nic.in/archive-ug/
-2. Seat matrix uploaded July 22, 2025:
-   https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/07/2025072296.pdf
-3. Final Result for Round-I of NEET UG Counselling 2025, August 13, 2025:
-   https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/08/20250813289226788.pdf
-4. MCC correction, August 13, 2025, removing one SC PwD seat at AIIMS New Delhi:
-   https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/08/20250813868365001.pdf
+Official starting page:
+https://mcc.nic.in/pg-medical-counselling/
 
-METHOD
-- Downloaded public official PDFs; retained original PDFs and pdftotext -layout text in sources/.
-- Parsed 20 matrix rows by MCC institute code; verified each row sums to its published total.
-- Applied the specific AIIMS New Delhi SC PwD correction: July value 1 becomes 0. Original values remain documented in the record notes and linked source.
-- Selected only corresponding institutions, MBBS and Open Seat Quota in the final allotment result.
-- Aggregated minimum and maximum rank by institute and ALLOTTED category. No individual candidate records, names, roll numbers or application identifiers are in dist/data.json.
-- Preserved the distinction between allotted seat category and candidate category. Handled wrapped PwD cells using the original table column positions. Using candidate category instead would produce incorrect cutoffs.
-- Normalized matrix General-EWS to EWS, matching the result document; preserved originalCategory in each record. Open means the open seat category, not solely General-category candidates.
-- City/name spelling is normalized for display; source institution codes are retained. Unverified university and institution-website fields remain null.
-- openingRank / closingRank are DERIVED historical aggregates of allotted candidates. They are not MCC-published forecast probabilities, current vacancies, admissions guarantees or joined-candidate cutoffs.
+The four final matrix PDFs published on 15 October 2026 are included:
 
-RECONCILIATION
-200 institution/category pools across 20 institutions.
-2,178 historical allotments in the included institutions.
-2,178 seats after applying the documented deletion.
-Every individual institution/category pool's allotment count equals its corrected matrix count.
-174 pools have at least one allotted rank; 26 zero-seat pools correctly have null ranks.
-No unreconciled pool remains in this bounded dataset.
-PDF SHA-256 hashes and acquisition counts are saved in sources/acquisition-summary.json.
+ALL INDIA QUOTA (MD/MS)
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610151676193504.pdf
+Local PDF: sources/mcc-2026-pg-r1-aiq-seat-matrix.pdf
+621 pages; 10,059 original source rows; 14,113 published seats.
 
-UNVERIFIED FIELDS
-No verified annual fee, stipend, service bond, bond penalty, previous-year seats, score-to-rank curve, current vacancy or new-seat change is bundled. Those fields are null in all official records. Academic rules and requirements must be checked against the current session's official sources.
+DEEMED (MD/MS)
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/20261015907178910.pdf
+Local PDF: sources/mcc-2026-pg-r1-deemed-seat-matrix.pdf
+115 pages; 1,470 original source rows; 7,537 published seats.
 
-DEMONSTRATION DATA
-Eight explicitly fictional institutions have names beginning 'Demo ·'. The dataStatus is demo; verified is false; sourceUrl is null. The 1,440 generated records span six exams, 2024/2025, three rounds and five categories to demonstrate filtering, comparisons, choice lists, fee/bond tools and trends. These are not admissions facts and must remain opt-in / visibly identified in the UI. The generated rankCurves are also demo-only.
+DNB
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610151482599908.pdf
+Local PDF: sources/mcc-2026-pg-r1-dnb-seat-matrix.pdf
+503 pages; 4,487 original source rows; 9,201 published seats.
 
-RESOURCES AND NOTICES
-Official portal links were browsed on acquisition day. Notices are links to official notice boards, with date=null; they are not fabricated deadlines and the app does not claim a live synchronized notice feed. A dated historical correction is listed separately. No private Zynerd API or database was accessed or used.
+CENTRAL INTERNAL QUOTA (MD/MS)
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610151906520168.pdf
+Local PDF: sources/mcc-2026-pg-r1-internal-seat-matrix.pdf
+28 pages; 505 original source rows; 857 published seats.
+
+TOTAL AND METHOD
+1,267 pages, 16,521 original rows, 31,708 seats and 1,829 distinct printed MCC institution codes. All pages were parsed; individual rows and printed document totals reconcile. Expanding DNB category columns produces 56,904 institution/course/quota/category records: 17,391 positive-seat records and 39,513 zero-seat records. Zero-seat records are retained in separate pg-zero-*.json chunks and loaded when explicitly requested.
+
+MCC institute codes and source labels are preserved in the acquisition output. OP/BC/EW/SC/ST and NO/PH categories are mapped to Open/OBC/EWS/SC/ST and PwD labels. Original labels remain available in the acquisition artifacts. MD/MS course codes are used when printed. DNB course codes are derived only when the complete normalized label exactly matches the official 2025 Round 3 course glossary. Unmatched course codes remain null. Address-derived state labels are not inferred where the source is unclear; city fields are not guessed.
+
+These are published Round 1 inventory snapshots, not live vacancy counts. Later additions, removals, corrections or later-round documents can change inventory. MCC inventory does not establish an individual's eligibility for all listed quotas/categories.
+
+Parser: sources/build_pg_seats.py
+Reconciliation and PDF hashes: sources/pg-seats-summary.json
+Institution lookup: sources/pg-seat-institution-lookup.json
+Intermediate output: pg-seats.json, moved to sources/derived/ by the site compiler.
+
+2. HISTORICAL RANKS: MCC NEET PG 2025 FINAL RESULTS
+
+Official starting page:
+https://mcc.nic.in/archive-pg/
+
+ROUND 1
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/11/202511221303622410.pdf
+Local PDF: sources/mcc-pg-2025-r1-result.pdf
+1,301 pages; 26,889 result rows; 26,889 allotment events; 14,591 aggregate pools.
+
+ROUND 2
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2025/12/202512172132273940.pdf
+Local PDF: sources/mcc-pg-2025-r2-result.pdf
+2,844 pages; 35,023 result rows; 20,787 allotment events; 13,108 aggregate pools.
+14,236 rows have no current-round allocation and are excluded from these rank aggregates.
+
+ROUND 3
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf
+Local PDF: sources/mcc-pg-2025-r3-result.pdf
+1,555 pages; 41,694 result rows; 18,673 allotment events; 12,639 aggregate pools.
+23,021 rows have no current-round allocation and are excluded from these rank aggregates.
+
+STRAY VACANCY
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260223177387794.pdf
+Local PDF: sources/mcc-pg-2025-stray-result.pdf
+130 pages; 2,798 result rows; 2,798 allotment events; 2,583 aggregate pools.
+
+TOTAL AND METHOD
+5,830 pages; 106,404 source result rows reconcile to 69,147 allotment events and 37,257 rows without a current-round allocation. There are 42,921 aggregate pools, zero parsing omissions and zero duplicate rank rows within each source. Allotment events across rounds are not distinct individuals.
+
+The parser uses PDF table cell rectangles and rotation-aware word coordinates. Each round's current allotment columns are used; earlier-round held seats in the same document are not mistaken for new allotments. The allotted-seat category is kept separate from the candidate category, including wrapped PwD cells. Open is an open seat category, not solely General-category candidates. Opening and closing AIR are derived as minimum and maximum source Rank within the same institution, course, quota, allotted category, year and round. The separate AFMS merit ranks appearing in some remarks are not collected or published. Grouped fresh/upgraded/no-allocation reason counts are retained.
+
+Source year is the counselling session year: Round 3 and Stray published in February 2026 still belong to NEET PG 2025. Each observation retains its year, round, source and page range. Historical allotmentCount is not seat capacity; historical records keep seats=null.
+
+The 100 course labels in the official Round 3 glossary (pages 1-3) exactly match all 42,921 historical pool labels after punctuation/whitespace normalization. Course codes derived from that glossary are distinguished from codes printed directly in a matrix row. Original course labels are retained in acquisition artifacts.
+
+Parser: sources/build_pg_history.py
+Reconciliation and PDF hashes: sources/pg-history-summary.json
+Official course glossary: sources/pg-course-glossary.json
+Intermediate output: pg-history.json, moved to sources/derived/ by the site compiler.
+
+3. LINKING CURRENT INVENTORY TO HISTORICAL OBSERVATIONS
+
+Compiler: sources/build_pg_site.py
+Build summary: sources/pg-site-summary.json
+Curated institution match artifact: sources/pg-institution-matches.json
+
+The curated artifact contains 1,033 one-to-one institution links: 86 exact normalized complete institution/address matches and 947 unique exact institution-name matches with the same explicit state. For the name method, the institution name is the source text before the first comma, normalized for case, accents, punctuation and whitespace. Exactly one historical and one current identity must share that name/state key. Generic institutional names, ambiguous identities, missing explicit states and conflicting explicit postcodes are excluded from this method. Exact full-address matches take precedence. Source identities, evidence and excluded cases are retained in the artifact. No fuzzy similarity, abbreviation expansion, substring matching or inferred city/state is used.
+
+Institution linkage alone does not assign historical ranks to a seat pool. The course code, quota and allotted category must also match exactly. Missing or unmatched course codes do not receive a guessed equivalent. Unmatched institutions and pools remain separate.
+
+Historical observations retain their own year and round when displayed beside 2026 inventory. The selected most recent available observation is not relabelled as a 2026 cutoff. Missing historical matches do not prove that a seat is new or that admission is easier. The final linked pool counts and file inventory are recorded by the compiler, not assumed from the institution match count or acquisition totals.
+
+The deployment uses a compact manifest/source index. Active inventory and historical observations load from pg-records-*.json; zero-seat inventory loads separately from pg-zero-*.json only when requested. Defaults restore unknown numerical fields as null; omitted compact fields do not mean zero. Acquisition originals and full extraction provenance are kept outside dist/.
+
+4. FINANCIALS, GUIDES, NOTICES AND STATE AUTHORITIES
+
+Guidance and financial provenance is separately documented in sources/pg-content-provenance.txt. Curated content is an input to the compiler, not inferred from seat or allotment PDFs. Financial examples are from separately dated institutional publications, including GMCH Chandigarh and St John's Medical College. Their exact programme, fee scope, source year and stated exceptions remain attached.
+
+Financial coverage is limited. No national fee, stipend or service-bond database is asserted. Unknown tuition, stipend, bond and penalty values stay null. Tuition, total first-year charges, course-discontinuation penalties and post-course service bonds are distinct; one is not substituted for another. Personal budget calculations use the user's own assumptions. No validated score-to-rank prediction curve is bundled.
+
+Official notices and tentative schedules are manually checked snapshots as of the stated acquisition date. Source revisions supersede them. State coordination windows are not individual state application deadlines. The selected state-authority directory is guidance only and does not extend the MCC seat/cutoff dataset to state counselling seats.
+
+5. REPRODUCTION, STORAGE AND PUBLICATION BOUNDARIES
+
+Run from zyjock/ with Python 3, uv, PyMuPDF and Poppler's pdftotext:
+  uv run --with pymupdf python sources/build_pg_history.py
+  uv run --with pymupdf python sources/build_pg_seats.py
+  python sources/build_pg_site.py
+
+The builders download missing official source PDFs. The compiler reads acquisition intermediates from dist/ or ignored sources/derived/, tracked sources/pg-content.json for curated guides, notices, schedules and financial examples, and tracked sources/pg-institution-matches.json for the documented institution links. Preserve both curated inputs when rebuilding. They are maintained independently of numerical extraction; a new source snapshot requires review of its institution match evidence. The history builder is run first to make the course glossary available for seat-code enrichment.
+
+The compiler writes dist/data.json, active dist/pg-records-*.json and lazy dist/pg-zero-*.json chunks, and moves large intermediate data files to ignored sources/derived/. All public chunks must accompany the manifest when deployed. Raw PDFs, extracted text, candidate-level input documents, extraction caches and review images are excluded from Git and deployment. Public outputs contain aggregate observations, no candidate names, roll numbers, application identifiers or individual result rows. Public candidate-source PDFs are linked for provenance but are not republished in dist/.
+
+The user's PG plan, lists, imports, checklist, reminders and read markers are browser-local under localStorage key zyjock.pg.workspace.v2. There is no account synchronization, backend payment service or automatic data refresh. Imports remain unverified and are processed locally. Backups are needed before clearing browser storage or changing devices/origins.
+
+Zyjock is independently branded. No private Zynerd API or database was accessed or used.

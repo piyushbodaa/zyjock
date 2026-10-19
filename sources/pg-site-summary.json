@@ -1,0 +1,102 @@
+{
+  "label": "NEET PG official data",
+  "publishedSeats": 31708,
+  "currentInstitutes": 1829,
+  "currentRecords": 56904,
+  "historicalRecords": 42921,
+  "historicalAllotments": 69147,
+  "historicalScope": "2025 \u00b7 Rounds 1, 2, 3 and Stray Vacancy",
+  "matchedCurrentPools": 5616,
+  "financialPools": 56,
+  "summary": "MCC 2026 Round 1 published matrices contain 31,708 seats. The historical explorer contains 42,921 cutoff observations derived from MCC 2025 final allotment results. 5,616 current seat pools have an exact historical match.",
+  "limitations": [
+    "MCC counselling only. State counselling outside these MCC sources is not included in the seat and cutoff dataset.",
+    "The 2026 matrices are a dated publication snapshot and can be revised; they are not a live vacancy feed.",
+    "Historical cutoffs aggregate current-round allotments by allotted seat category. Held seats without a new allocation are excluded from later-round observations.",
+    "Cross-year institution matching uses exact full addresses or unique exact names within the same explicit state. Generic names, ambiguous identities and conflicting postcodes are excluded from name matching. Course code, quota and allotted category must also match. Unmatched rows are not labelled new seats.",
+    "Financial source coverage is limited and separately dated. Missing fees, stipends or bond terms remain unknown.",
+    "No fictional colleges, demo ranks or other exams are included. Personal candidate identifiers are excluded."
+  ],
+  "institutionMatches": 1033,
+  "ambiguousInstitutionKeys": 233,
+  "compiledPools": 99825,
+  "files": [
+    {
+      "name": "data.json",
+      "bytes": 826657
+    },
+    {
+      "name": "pg-records-0.json",
+      "bytes": 2428699
+    },
+    {
+      "name": "pg-records-1.json",
+      "bytes": 2566995
+    },
+    {
+      "name": "pg-records-2.json",
+      "bytes": 2799792
+    },
+    {
+      "name": "pg-records-3.json",
+      "bytes": 2498425
+    },
+    {
+      "name": "pg-records-4.json",
+      "bytes": 2511777
+    },
+    {
+      "name": "pg-records-5.json",
+      "bytes": 2487429
+    },
+    {
+      "name": "pg-records-6.json",
+      "bytes": 2518100
+    },
+    {
+      "name": "pg-records-7.json",
+      "bytes": 2490234
+    },
+    {
+      "name": "pg-records-8.json",
+      "bytes": 2505354
+    },
+    {
+      "name": "pg-records-9.json",
+      "bytes": 2500163
+    },
+    {
+      "name": "pg-records-10.json",
+      "bytes": 129149
+    },
+    {
+      "name": "pg-zero-0.json",
+      "bytes": 2143885
+    },
+    {
+      "name": "pg-zero-1.json",
+      "bytes": 2158474
+    },
+    {
+      "name": "pg-zero-2.json",
+      "bytes": 2169454
+    },
+    {
+      "name": "pg-zero-3.json",
+      "bytes": 2143389
+    },
+    {
+      "name": "pg-zero-4.json",
+      "bytes": 2140814
+    },
+    {
+      "name": "pg-zero-5.json",
+      "bytes": 2155912
+    },
+    {
+      "name": "pg-zero-6.json",
+      "bytes": 1258091
+    }
+  ],
+  "matchingMethod": "Exact full institution/address or unique exact institution name and explicit state, with generic names, ambiguity and postcode conflicts excluded; exact course code, quota and allotted category. See pg-institution-matches.json. No fuzzy matching."
+}

@@ -1,6 +1,6 @@
-# Zyjock
+# Zyjock · NEET PG
 
-A free, independent NEET counselling planning website. All implemented tools are available without payment or an account. Zyjock uses its own interface and branding; it is not affiliated with Zynerd, MCC, NMC, AIIMS or NBEMS. No private Zynerd API or database is used.
+A free, independent website for planning **NEET PG counselling**. Every implemented tool is available without payment or an account. Zyjock uses its own interface and branding and is not affiliated with Zynerd, MCC, NMC or NBEMS. No private Zynerd API or database is used.
 
 ## Run locally
 
@@ -10,54 +10,59 @@ From this directory:
 npm run dev
 ```
 
-Open <http://127.0.0.1:4173>. The command requires Python 3; there are no npm dependencies to install. You can also run `python -m http.server 4173 --bind 127.0.0.1 --directory dist` directly. Serve the `dist/` directory for a static deployment.
+Open <http://127.0.0.1:4173>. Python 3 is required; there are no npm dependencies to install. The direct command is `python -m http.server 4173 --bind 127.0.0.1 --directory dist`.
+
+Deploy the complete `dist/` directory. Its `data.json` manifest loads active inventory and historical observations from `pg-records-*.json`; zero-seat pools load from `pg-zero-*.json` only when requested. Keep the manifest and both sets of chunks together.
 
 ## Included tools
 
-- Search and filter colleges, courses, historical cutoffs and seat matrices by exam, state, quota, category, year and round.
-- Compare institutions and reported tuition, stipends and service bonds.
-- Create, rename, reorder and export choice lists; generate a draft from explicit preferences.
-- Inspect available round history and seat changes when comparable records exist.
-- Compare an AIR with historical closing ranks; explore explicitly selected demo score-to-rank curves.
-- Read source-linked guides, open official notice boards, keep a checklist and export personal reminders to a calendar.
-- Import CSV or JSON records, export results, and download or restore a workspace backup. Imports remain marked unverified.
+- A personal PG plan with AIR, allotted seat category, specialty, state and tuition preferences.
+- College and hospital search, a specialty explorer, and filters for programme, quota, category, source year and round.
+- The published 2026 MCC seat matrices beside separately dated, conservatively matched 2025 historical ranks.
+- Historical cutoff search and round comparisons, with source links on each observation.
+- Institution comparisons, reported financial examples, and a budget calculator using your own assumptions.
+- Unlimited choice lists, preference-based draft generation, reordering, CSV export and printing.
+- Source-linked PG guidance, official notices and schedules, a checklist, personal reminders and calendar export.
+- CSV/JSON import, results export, and workspace backup/restore. Imported records remain labelled unverified.
 
-The app does not submit choices to counselling portals. The guidance search is a local reference search, and the notice directory links to official boards rather than claiming a synchronized news feed. There are no push notifications or human counselling services.
+This release contains NEET PG only, with no fictional institutions or demo ranks. A planning list does not submit or lock choices on an official portal. Guidance search is a local reference search. Notices and schedules are manually checked snapshots, not an automatically synchronized feed; no push notifications or human counselling service is provided.
 
-## Official data and its limits
+## Data coverage
 
-The bundled official dataset covers **20 institutions, MBBS, NEET UG, MCC Open Seat Quota, 2025 Round 1**. It contains 200 institution/category pools and 174 opening/closing rank ranges derived from MCC's final allotment result. The 26 pools with zero seats have null ranks.
+| Dataset | Included scope |
+|---|---|
+| 2026 seat inventory | Four MCC Round 1 matrices published on 15 October 2026: All India, deemed, DNB and central internal quota |
+| Published inventory totals | **31,708 seats**, **1,829 MCC institution codes**, and **56,904 category pools**, including 39,513 zero-seat pools |
+| 2025 historical results | Final Round 1, Round 2, Round 3 and Stray Vacancy results: **42,921 aggregate pools** from **69,147 allotment events** |
 
-Every pool's allotment count reconciles with the cited seat matrix after applying MCC's 13 August 2025 removal of one AIIMS New Delhi SC PwD seat: **2,178 seats and 2,178 allotments** in total. Ranks are grouped by **allotted seat category**, not the candidate's personal category. `Open` does not mean only General-category candidates. The matrix's `General-EWS` label is normalized to `EWS`, with the original label retained.
+The matrix totals reconcile to their printed documents. Historical extraction reconciles all 106,404 result rows: 69,147 allotment events and 37,257 rows without a current-round allocation, with zero parsing omissions. Events across rounds are not a count of distinct people. Opening and closing AIR are the minimum and maximum rank in the **allotted seat category**, not the candidate's personal category. `Open` includes qualifying candidates from other personal categories.
 
-These are historical allotment aggregates, not current vacancies, joined-candidate cutoffs or admission predictions. This is a bounded subset, not national coverage. The public dataset contains no individual candidate records, names, roll numbers or application identifiers.
+The curated [institution match artifact](sources/pg-institution-matches.json) links **1,033 institutions one-to-one**: 86 by exact normalized full address and 947 by a unique exact institutional name with the same explicit state. Name matching excludes generic names, ambiguous identities and conflicting explicit postcodes; it uses no fuzzy similarity or abbreviation expansion. A current seat pool receives historical ranks only when the course code, quota and allotted category also match exactly. Historical year and round remain visible. Unmatched pools remain unmatched; this does not mean they are newly created or easier to obtain. The latest build's linked pool counts and publication file inventory are in [sources/pg-site-summary.json](sources/pg-site-summary.json).
 
-**Verified fees, stipends, bonds, previous-year seat counts and score-to-rank curves are not bundled.** Unknown numerical values remain `null`; the interface does not treat them as zero. Current rules and deadlines must be checked on the relevant authority's portal.
+**The seat and cutoff dataset covers these MCC sources only.** State counselling outside them is not included. The selected state authority links in the guidance library form a separate directory, not a claim of state dataset coverage. The 2026 matrix is a dated publication snapshot, not live vacancy availability. Historical observations describe allotted seats, not joined admissions or admission guarantees.
 
-Eight fictional institutions, each named `Demo · …`, supply 1,440 sample records across NEET UG, NEET PG, NEET MDS, INICET, NEET SS and DNB PDCET. These demonstrate tools for other exams and numerical comparisons. Demo records and curves are explicitly marked and are not admission data. The app starts in the official-data mode; switching exams does not silently substitute demo records.
+Financial coverage is limited to separately sourced institutional examples. Missing tuition, stipend, service-bond and penalty figures remain unknown; a blank field is not zero. Annual tuition, total first-year charges, discontinuation penalties and service bonds are distinct. There is no national fee/stipend/bond database or validated score-to-rank prediction curve bundled with this release.
 
-## Sources and reproduction
+## Sources and rebuilding
 
-The source PDFs are linked from the [MCC UG archive](https://mcc.nic.in/archive-ug/). Exact document URLs, extraction method, corrections and coverage limits are recorded in [data-provenance.txt](data-provenance.txt). The [acquisition summary](sources/acquisition-summary.json) stores only aggregate counts, reconciliation results and source-file SHA-256 hashes.
+The official starting points are the [MCC PG page](https://mcc.nic.in/pg-medical-counselling/) and [MCC PG archive](https://mcc.nic.in/archive-pg/). [data-provenance.txt](data-provenance.txt) records exact matrix/result URLs, extraction methods, reconciliation and limitations. The separate [PG content provenance](sources/pg-content-provenance.txt) documents the guidance and financial sources.
 
-[sources/build_data.py](sources/build_data.py) builds `dist/data.json`. To reproduce it, download the three official PDFs listed in the provenance file using these local filenames:
+The published files are ready to serve. To rebuild the data pipeline, use Python 3, [uv](https://docs.astral.sh/uv/), PyMuPDF and Poppler's `pdftotext`. Acquisition scripts download missing official PDFs. Keep the tracked [sources/pg-content.json](sources/pg-content.json) and [sources/pg-institution-matches.json](sources/pg-institution-matches.json) inputs: they supply curated content and the documented institution links, respectively, and are maintained separately from numerical extraction.
 
-- `sources/mcc-2025-ug-r1-inis-seat-matrix.pdf`
-- `sources/mcc-2025-ug-r1-result.pdf`
-- `sources/mcc-2025-ug-r1-aiims-delhi-seat-removal.pdf`
-
-Then run:
+Then run, in order:
 
 ```bash
-pdftotext -layout sources/mcc-2025-ug-r1-inis-seat-matrix.pdf sources/mcc-2025-ug-r1-inis-seat-matrix.txt
-pdftotext -layout sources/mcc-2025-ug-r1-result.pdf sources/mcc-2025-ug-r1-result.txt
-python sources/build_data.py
+uv run --with pymupdf python sources/build_pg_history.py
+uv run --with pymupdf python sources/build_pg_seats.py
+python sources/build_pg_site.py
 ```
 
-This requires Python 3 and Poppler's `pdftotext`. Original PDFs, extracted text and review images are local acquisition evidence excluded from Git and from the public `dist/` folder. The script and aggregate acquisition summary remain in source control.
+The history builder creates the official course glossary. The seat builder retains printed institution/course codes and reconciles the four matrices. The site compiler applies the curated institution links and exact course/quota/category matching, keeps current inventory separate from history, and writes the public manifest, active `pg-records-*.json` chunks and lazily loaded `pg-zero-*.json` chunks. It reads acquisition intermediates from `dist/` or ignored `sources/derived/`, curated content from `sources/pg-content.json`, and institution links from `sources/pg-institution-matches.json`. Large acquisition intermediates are moved out of the public directory after compilation. A new source snapshot needs its institution match evidence reviewed before reuse.
 
-## Storage and deployment
+Source PDFs, extracted text, raw extraction caches and review images remain local and are excluded from Git and deployment. Public data contains aggregate observations rather than candidate names, roll numbers, application identifiers or individual result rows. Tracked acquisition summaries retain counts, source-file hashes and reconciliation results.
 
-Lists, imported records, checklist progress, reminders and read markers are stored in this browser's `localStorage`, keyed by `zyjock.workspace.v1`. They are not synchronized between devices, browsers or origins. Clearing browser storage removes them; use workspace backups to retain a copy. Imports are parsed locally and are not sent to a server.
+## Browser storage
 
-The application is static HTML, CSS and JavaScript with a bundled JSON dataset. There is no backend account service, payment service or automatic official-data refresh. External authority links open those providers' websites. Deploy only `dist/` and preserve the source and demo labels when extending the dataset.
+The PG plan, lists, imported records, checklist, reminders and read markers are saved in this browser's `localStorage` under `zyjock.pg.workspace.v2`. They do not synchronize across browsers, devices or origins. Clearing browser storage removes them; download a workspace backup to keep a copy. Imports are parsed locally and are not sent to a server.
+
+Zyjock is static HTML, CSS and JavaScript. There is no backend account service, payment integration or automatic official-data refresh. External source links open the publishing authority's website. Keep the source dates, unknown values and coverage labels when extending the data.

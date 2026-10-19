@@ -1,0 +1,602 @@
+[
+  {
+    "code": "DANS",
+    "label": "(NBEMS) ANAESTHESIOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DANT",
+    "label": "(NBEMS) Anatomy",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DBIO",
+    "label": "(NBEMS) BIOCHEMISTRY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DCTVS",
+    "label": "(NBEMS) Cardio Vascular and Thoracic Surgery (Direct 6 Years Course)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DCOM",
+    "label": "(NBEMS) COMMUNITY MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDDVL",
+    "label": "(NBEMS) DERMATOLOGY and VENEREOLOGY and LEPROSY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DEMM",
+    "label": "(NBEMS) Emergency Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DFLM",
+    "label": "(NBEMS) FAMILY MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DFRM",
+    "label": "(NBEMS) FORENSIC MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DMED",
+    "label": "(NBEMS) GENERAL MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DSUR",
+    "label": "(NBEMS) GENERAL SURGERY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DGRM",
+    "label": "(NBEMS) Geriatric Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DHAD",
+    "label": "(NBEMS) Hospital Administration",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DIBT",
+    "label": "(NBEMS) IMMUNO-HAEMATOLOGY AND BLOOD TRANSFUSION",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DMIC",
+    "label": "(NBEMS) MICROBIOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DNRS",
+    "label": "(NBEMS) Neuro Surgery (Direct 6 Years Course)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DNUM",
+    "label": "(NBEMS) NUCLEAR MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DOBG",
+    "label": "(NBEMS) Obstetrics and Gynaecology",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DOPH",
+    "label": "(NBEMS) OPHTHALMOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDORT",
+    "label": "(NBEMS) ORTHOPAEDICS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DENT",
+    "label": "(NBEMS) Otorhinolaryngology (E.N.T.)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPEDS",
+    "label": "(NBEMS) Paediatric Surgery (Direct 6 Years Course)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPED",
+    "label": "(NBEMS) PAEDIATRICS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPLM",
+    "label": "(NBEMS) Palliative Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPTH",
+    "label": "(NBEMS) PATHOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPHA",
+    "label": "(NBEMS) PHARMACOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPMRN",
+    "label": "(NBEMS) PHYSICAL MED. and REHABILITATION",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPHYN",
+    "label": "(NBEMS) PHYSIOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPLS",
+    "label": "(NBEMS) Plastic and Reconstructive Surgery (Direct 6 Years Course)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPSYN",
+    "label": "(NBEMS) PSYCHIATRY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DRTH",
+    "label": "(NBEMS) RADIATION ONCOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DRAD",
+    "label": "(NBEMS) RADIO-DIAGNOSIS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DREP",
+    "label": "(NBEMS) Respiratory Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NBDA",
+    "label": "(NBEMS-DIPLOMA) ANAESTHESIOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NFLM",
+    "label": "(NBEMS-DIPLOMA) FAMILY MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDGO",
+    "label": "(NBEMS-DIPLOMA) Obstetrics and Gynaecology",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NBDO",
+    "label": "(NBEMS-DIPLOMA) OPHTHALMOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDLO",
+    "label": "(NBEMS-DIPLOMA) Otorhinolaryngology (E.N.T.)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDCH",
+    "label": "(NBEMS-DIPLOMA) PAEDIATRICS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDMR",
+    "label": "(NBEMS-DIPLOMA) RADIO-DIAGNOSIS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDTC",
+    "label": "(NBEMS-DIPLOMA) Tuberculosis and CHEST DISEASES",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-RM",
+    "label": "DIP IN RADIATION MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DDVL",
+    "label": "DIP. IN DERM. VENEREOLOGY and LEPROSY/DERMATOLOGY /VENEREOLOGY and DERMATOLOGY/LEPROSY/VENEREAL DISEASE and LEPROSY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-FM",
+    "label": "DIP. IN FORENSIC MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DMRT",
+    "label": "DIP. IN MEDICAL RADIO-THERAPY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPMR",
+    "label": "DIP. IN PHY. MEDICINE and REHAB.",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-SM",
+    "label": "DIP. IN SPORTS MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DTCD",
+    "label": "DIP. IN T.B. and CHEST DISEASES",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-GO",
+    "label": "DIP.IN GYNAE. and OBST.",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DHBT",
+    "label": "DIP.IN IMMUNO-HAEMATOLOGY and BLOOD TRANSFUSION",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DMRD",
+    "label": "DIP.IN MEDICAL RADIO-DIAGNOSIS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-AN",
+    "label": "DIPLOMA IN ANAESTHESIOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DBCT",
+    "label": "DIPLOMA IN BACTERIOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-CH",
+    "label": "DIPLOMA IN CHILD HEALTH/ PAEDIATRICS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-CP",
+    "label": "DIPLOMA IN CLINICAL PATHOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DDIB",
+    "label": "DIPLOMA IN DIABETOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DHEA",
+    "label": "DIPLOMA IN HEALTH ADMINISTRATION",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-OP",
+    "label": "DIPLOMA IN OPHTHALMOLOGY/DOMS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DORT",
+    "label": "DIPLOMA IN ORTHOPAEDICS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-LO",
+    "label": "DIPLOMA IN OTO-RHINO-LARYNGOLOGY",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "D-PH",
+    "label": "DIPLOMA IN PUBLIC HEALTH",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NDEM",
+    "label": "Diploma-Emergency Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "NUSR",
+    "label": "M.Ch. (Neuro Surgery)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "AERO",
+    "label": "M.D. (AEROSPACE MEDICINE)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "ASTH",
+    "label": "M.D. (ANAESTHESIOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "BIOC",
+    "label": "M.D. (BIOCHEMISTRY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "CH-A",
+    "label": "M.D. (COMMUNITY HEALTH and ADMN.)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DV-L",
+    "label": "M.D. (DERM.,VENE. and LEPROSY)/ (DERMATOLOGY)/(SKIN and VENEREAL DISEASES)/(VENEREOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "E-CC",
+    "label": "M.D. (Emergency and Critical Care)/M.D. (Emergency Medicine)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "F-ME",
+    "label": "M.D. (FAMILY MEDICINE)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "FMED",
+    "label": "M.D. (FORENSIC MEDICINE)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "GMED",
+    "label": "M.D. (GENERAL MEDICINE)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "HADM",
+    "label": "M.D. (Hospital Administration)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "MICR",
+    "label": "M.D. (MICROBIOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "OBGY",
+    "label": "M.D. (Obst. and Gynae)/MS (Obstetrics and Gynaecology)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PAED",
+    "label": "M.D. (PAEDIATRICS)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PMED",
+    "label": "M.D. (PALLIATIVE MEDICINE)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PATH",
+    "label": "M.D. (PATHOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PHAR",
+    "label": "M.D. (PHARMACOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PM-R",
+    "label": "M.D. (PHYSICAL MED. and REHABILITATION)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PHYS",
+    "label": "M.D. (PHYSIOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "P-SM",
+    "label": "M.D. (PREVENTIVE and SOCIAL MEDICINE)/ COMMUNITY MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "PSYY",
+    "label": "M.D. (PSYCHIATRY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "RADD",
+    "label": "M.D. (RADIO-DIAGNOSIS)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "RADT",
+    "label": "M.D. (Radiotherapy/ Radiation Oncology)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "TMED",
+    "label": "M.D. (TROPICAL MEDICINE)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "TBRD",
+    "label": "M.D. (Tuberculosis and Respiratory diseases)/Pulmonary Medicine /M.D. (Respiratory Medicine)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "GERA",
+    "label": "M.D. GERIATRICS",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "N-ME",
+    "label": "M.D. IN NUCLEAR MEDICINE",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "T-FM",
+    "label": "M.D. IN TRANSFUSION MEDICINE/ IMMUNO-HAEMATOLOGY and BLOOD TRANSFUSION",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "SMED",
+    "label": "M.D. Sports Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "LMED",
+    "label": "M.D.Laboratory Medicine Course",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DMPH",
+    "label": "M.P.H. (EPIDEMIOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "MSTS",
+    "label": "M.S. ( Traumatology and Surgery )",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "EN-T",
+    "label": "M.S. (E.N.T.)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "GSUR",
+    "label": "M.S. (GENERAL SURGERY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "OPTH",
+    "label": "M.S. (OPHTHALMOLOGY)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "ORTH",
+    "label": "M.S. (ORTHOPAEDICS)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "ANAT",
+    "label": "MD/MS (Anatomy)",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  },
+  {
+    "code": "DPSY",
+    "label": "PG Diploma in Psychological Medicine / Psychiatric Medicine",
+    "sourceUrl": "https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/02/20260206892439077.pdf",
+    "sourcePages": "1-3"
+  }
+]

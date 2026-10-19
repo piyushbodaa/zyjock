@@ -11,3 +11,12 @@ sources/**/*.png
 sources/**/*.jpg
 sources/**/*.jpeg
 sources/**/*.webp
+
+# PG acquisition intermediates may contain public candidate-level source rows.
+sources/**/__pycache__/
+sources/**/*.pyc
+sources/**/*.rows.json
+sources/derived/
+sources/*-cache.json
+sources/*-cells.json
+!sources/pg-content-provenance.txt

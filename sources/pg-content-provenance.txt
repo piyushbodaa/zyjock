@@ -1,0 +1,132 @@
+ZYJOCK — NEET PG CONTENT PROVENANCE
+Research snapshot: 2026-10-19 (Asia/Kolkata)
+Artifact: dist/pg-content.json
+Scope: NEET PG 2026; no NEET UG, NEET MDS, INI-CET or NEET-SS admission instructions.
+
+DELIVERABLE
+13 guides, 37 resources, 10 dated notices, 30 timeline events, 4 representative
+financial records, 31 source records. The 18 state/UT entries form a selected
+official-authority directory, not an exhaustive national directory. Notices are
+a manually researched snapshot, not an automated live feed.
+
+MCC 2026 SCHEDULE
+Official schedule landing: https://mcc.nic.in/eservices-schedule-pg/
+Detailed tentative schedule published 2026-10-07:
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610071411981089.pdf
+Four pages, read as official PDF tables. Round 1 registration ends 21 October
+at noon, payment at 15:00; choice filling ends 22 October at 10:00; result
+24 October; reporting/joining 26 October–2 November. Rounds 2, 3 and stray
+vacancy were transcribed from their respective pages. Academic session starts
+20 November. These are explicitly tentative; later MCC revisions supersede.
+The source says server time. UI time values have IST labels; deadlineAt values
+include +05:30. date/endDate retain ISO calendar-date strings.
+
+AIQ/state coordination schedule, published 2026-10-08:
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610081115756031.pdf
+The state windows are NOT treated as every state's registration deadlines.
+Only Chandigarh's individually published 2026 dates were added beside MCC's
+timeline; those rows explicitly identify GMCH Chandigarh as authority.
+
+MCC PROCESS AND DOCUMENTS
+2026 bulletin:
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610082121348550.pdf
+Pages 9–17: Freeze/Float, round workflow. Pages 23–24: AIQ and eligibility.
+Pages 46–47: originals/document checklist and 30 September 2026 internship
+cut-off. The official file's cover retains a draft-version label, although MCC
+links it as Information Bulletin 2026. It is not presented as overriding later
+notices. No individualized eligibility or disability determination is made.
+
+Candidate user guide, posted 2026-10-12:
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610121388624358.pdf
+Official portal registration, payment, choice ordering/locking, willingness,
+document upload and discrepancy response. Zyjock's planner never represents
+itself as submitting or locking an actual counselling choice.
+
+NRI corrigendum dated 2026-10-14 (filename/upload date 15 October):
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610151921258874.pdf
+PwBD clarification dated 2026-10-15:
+https://cdnbbsr.s3waas.gov.in/s3e0f7a4d0ef9b84b83b693bbf3feb8e6e/uploads/2026/10/202610151285229813.pdf
+The PwBD document subject was inspected; a misleading site label/filename
+was not used to invent a fake-notice claim.
+
+NBEMS RESULT — 2026 SCORE SCALE
+Original NBEMS notice dated 2026-09-24, mirrored by the official Gujarat
+admission authority and linked from https://www.medadmgujarat.org/pg/home.aspx:
+https://medadmgujarat.ncode.in/web/PG2026/MDMS/NBEMS_2026619243078.PDF
+English pages 3–4 explicitly state scores OUT OF 720. Initial qualifying
+scores: General/EWS 262; General PwBD 244; SC/ST/OBC including PwBD 226.
+These are qualification thresholds, not college admission cut-offs or a
+score-to-rank curve. The 2025 maximum of 800 must not be carried into 2026.
+Direct NBEMS access was intermittently unavailable; the host/publisher
+distinction is explicit in the source metadata.
+
+FINANCIAL EXAMPLES — ALL AMOUNTS INR
+GMCH Chandigarh official 2026 prospectus:
+https://www.gmch.gov.in/sites/default/files/documents/approved%20prospectus.pdf
+Discovered from https://www.gmch.gov.in/admission-mdms-2026
+Page 28 (PG-11): tuition 22,000 / 24,500 / 27,500 for years 1 / 2 / 3.
+The listed approximate totals including university charges are 34,500 /
+32,500 / 36,000; other funds and hostel charges remain separate.
+annualFee is FIRST-YEAR TUITION ONLY (22,000), not total attendance cost.
+Stipend is referenced to administration notifications without an amount.
+Pages 26 and 43: conditional course-discontinuation obligation. The 5-lakh
+course-leaving condition is stored separately, NOT as a service-bond penalty.
+bondYears, bondPenalty and monthlyStipend remain null.
+Exact MCC institution match: instituteCode 700468, Government Medical
+College, Chandigarh, GOVT. MEDICAL COLLEGE AND HOSPITAL, CHANDIGARH.
+Matched against sources/pg-seat-institution-lookup.json. Do not match the
+different Government Multi Specialty Hospital, Sector 16 (700603).
+
+St John's Medical College official 2026 bulletin, signed 2026-09-28:
+https://www.stjohns.in/medicalcollege/uploads/courses-admission/courses/PG-Admission-Bulletin-2026.pdf
+This is a scanned ten-page PDF. Pages 4 and 8–10 were rendered and visually
+inspected. Page 8's heading explicitly identifies the 2026 fee chart.
+Representative records, annual tuition / listed first-year total:
+MD General Medicine: 1,150,000 / 1,265,970
+MD Radiodiagnosis: 1,200,000 / 1,305,970
+MD Pathology: 650,000 / 759,970
+The total includes the table's admission fees, deposit, other annual fee and
+RGUHS fee; hostel and mess excluded (page 9). annualFee is tuition only.
+Page 4: one-year institutional social obligation service, 500,000 default
+penalty, exemption for SJMC alumni who completed two years of rural service.
+This is not a state-wide bond rule. Page 10 only promises stipend according
+to current norms, without a number: monthlyStipend remains null.
+No exact St John's institution exists in the current MCC lookup; no code was
+invented. This institution admits through KEA and remains useful as an
+explicitly labelled financial source example outside current MCC seat rows.
+
+DNB NATIONAL POLICY REFERENCE
+NBEMS DNB/DrNB/FNB accreditation bulletin, January–May 2026:
+https://accr.natboard.edu.in/online_user/DOCUMENTS/misc/information_bulletin_chapter/Jan-feb/09-2026.pdf
+Official indexed PDF text at page 152, section 5.8: annual tuition 75,000;
+library 15,000; appraisal 15,000; accommodation 20,000. Sum 125,000.
+This is a policy reference object and guide, not an institution financial row.
+It must not be propagated to MD/MS seats, treated as tuition of 125,000, or
+described as an all-inclusive living-cost cap. Accommodation conditions and
+later notices apply. No specific hospital stipend was inferred. The source
+contains other course families; only DNB broad-specialty policy is used.
+Search-indexed primary text was readable; direct PDF fetch returned HTTP 403.
+The restriction was not bypassed. Older 2021 GST-inclusive fees were excluded.
+
+OTHER SOURCES AND FETCH LIMITS
+NMC's mandatory fee/stipend disclosure notice is dated July 2025. It is a
+publication-policy resource, not represented as a 2026 price list.
+MAHE's 2026–27 general fee PDF and KMC stipend page were primary indexed
+sources but not fully retrievable. They are source links only; no amounts
+were imported. An undated private-college fee page was excluded from numeric
+2026 data. No approximate/invented institution stipend was supplied.
+
+State resources preserve whether the page was inspected or only available
+as an official indexed result. Maharashtra, Uttar Pradesh and West Bengal
+interactive pages did not render in the research fetch. Several official
+homepages retain 2025 PG links; directory descriptions instruct users to
+check the session and make no claim that 2026 registration is open.
+Puducherry's inspected PG Medical dashboard said it would be enabled soon;
+no opening date was inferred. MDS and UG notices on shared portals were
+excluded from the PG notices and timeline.
+
+HANDOFF
+Unknown financial values are JSON null, never zero. Preserve feeScope,
+source year, bond exemption and notes wherever financial data are shown.
+Keep the MCC tentative label and the 2026 source dates visible.
+This task wrote only dist/pg-content.json and this provenance document.
