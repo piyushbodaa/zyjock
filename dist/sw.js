@@ -1,8 +1,8 @@
 /* Zyjock offline support. Bump VERSION on every release that changes the shell. */
-const VERSION = 'zyjock-v5';
+const VERSION = 'zyjock-v6-analytics';
 const SHELL = [
   './', './index.html', './app.js', './domain.js', './expansion.js', './features.js',
-  './styles.css', './favicon.svg', './manifest.webmanifest', './icon-192.png', './icon-512.png',
+  './analytics.js', './styles.css', './favicon.svg', './manifest.webmanifest', './icon-192.png', './icon-512.png',
 ];
 
 self.addEventListener('install', event => {
